@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lalateliê | Personalizando Momentos</title>
+  <meta name="description" content="Cadernos, planners, agendas e mimos artesanais feitos à mão com personalização exclusiva. Encadernação afetiva para inspirar sua rotina.">
+  <meta name="keywords" content="papelaria afetiva, papelaria artesanal, planner personalizado, caderno artesanal, encadernação wire-o, hot stamping, presentes corporativos">
+  <meta name="author" content="Lalateliê">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+
+  <!-- Google Fonts: Cormorant Garamond (Serif), Alex Brush (Script Caligráfico) e Plus Jakarta Sans (Sans legível) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Folha de Estilos Principal -->
+  <link rel="stylesheet" href="assets/css/style.css?v=19">
+
+  <!-- Folha de Estilos dos Cards do Catálogo -->
+  <link rel="stylesheet" href="assets/css/catalogo.css?v=16">
+
+  <!-- Folha de Estilos do Carrinho de Compras e Adicionais -->
+  <link rel="stylesheet" href="assets/css/carrinho.css?v=4">
+</head>
+<body>
+
+  <!-- Link de Acessibilidade para Navegação Rápida por Teclado -->
+  <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- ========================================================= -->
+  <!-- 1. CABEÇALHO / NAVEGAÇÃO SUPERIOR                         -->
+  <!-- ========================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <!-- Logotipo -->
+      <a href="#hero" class="brand-logo" aria-label="Lalateliê Página Inicial">
+        <img src="assets/images/logo/logo.png" alt="Lalateliê - Personalizando Momentos" class="brand-logo-img">
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="main-navigation" aria-label="Navegação Principal">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Início</a></li>
+          <li><a href="catalogo.html" class="nav-link">Catálogo</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre</a></li>
+          <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Ações do Header -->
+      <div class="header-actions">
+        <button type="button" class="btn-header-cart" id="btnHeaderCart" aria-label="Abrir carrinho de compras" title="Meu Carrinho">
+          <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          <span class="cart-count-badge" id="cartCountBadge">0</span>
+        </button>
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Overlay / Backdrop do Menu Mobile -->
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+
+    <!-- Menu Mobile Drawer -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Navegação móvel" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <ul class="mobile-nav-links">
+          <li><a href="#hero" class="mobile-nav-link">Início</a></li>
+          <li><a href="catalogo.html" class="mobile-nav-link">Catálogo</a></li>
+          <li><a href="#sobre" class="mobile-nav-link">Sobre</a></li>
+          <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
+          <li>
+            <a href="#" class="mobile-nav-link mobile-cart-item-link btn-open-cart-drawer">
+              <span class="mobile-cart-label"><i class="fa-solid fa-bag-shopping"></i> Meu Carrinho</span>
+              <span class="cart-count-badge">0</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-menu-cta">
+          <a href="#contato" class="btn btn-primary btn-block">
+            <i class="fa-brands fa-whatsapp"></i> Fazer Pedido Personalizado
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="mainContent">
+    <h1 class="visually-hidden">Lalateliê | Papelaria Afetiva & Artesanal Feita à Mão</h1>
+    <!-- ========================================================= -->
+    <!-- 2. HERO SECTION — CARROSSEL VISUAL DESTAQUE               -->
+    <!-- ========================================================= -->
+    <section class="hero-section" id="hero" aria-label="Destaques Lalateliê">
+      <div class="hero-carousel-container" id="heroCarouselContainer">
+        <div class="hero-carousel-track" id="heroCarouselTrack">
+          <!-- Slide 01 -->
+          <article class="hero-slide active" data-slide-index="0" aria-hidden="false">
+            <picture class="hero-slide-picture">
+              <source media="(max-width: 767px)" srcset="assets/images/galeria/mobile1.jpg">
+              <img src="assets/images/galeria/desktop1.jpg" alt="Destaque Lalateliê Papelaria Afetiva & Artesanal" class="hero-slide-img" fetchpriority="high" decoding="async">
+            </picture>
+          </article>
+
+          <!-- Slide 02 -->
+          <article class="hero-slide" data-slide-index="1" aria-hidden="true">
+            <picture class="hero-slide-picture">
+              <source media="(max-width: 767px)" srcset="assets/images/galeria/mobile2.jpg">
+              <img src="assets/images/galeria/desktop2.jpg" alt="Agendas e cadernos personalizados feitos à mão" class="hero-slide-img" loading="lazy" decoding="async">
+            </picture>
+          </article>
+
+          <!-- Slide 03 -->
+          <article class="hero-slide" data-slide-index="2" aria-hidden="true">
+            <picture class="hero-slide-picture">
+              <source media="(max-width: 767px)" srcset="assets/images/galeria/mobile3.jpg">
+              <img src="assets/images/galeria/desktop3.jpg" alt="Mimos artesanais e papelaria personalizada" class="hero-slide-img" loading="lazy" decoding="async">
+            </picture>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 4. CATÁLOGO DE PRODUTOS EM DESTAQUE                       -->
+    <!-- ========================================================= -->
+    <section class="products-section section-padding" id="produtos">
+      <div class="container">
+        <div class="section-header text-center section-header-reveal">
+          <span class="section-eyebrow">COLEÇÃO EXCLUSIVA</span>
+          <h2 class="section-title">Encante-se com nossos produtos</h2>
+          <p class="section-subtitle">
+            Peças artesanais e personalizadas criadas com delicadeza, afeto e materiais nobres para organizar a sua rotina.
+          </p>
+        </div>
+
+        <!-- Grade Dinâmica de Produtos em Destaque (Gerada automaticamente via produtos-data.js) -->
+        <div class="catalogo-grid home-products-grid" id="homeProductsGrid" aria-live="polite">
+          <!-- Cards gerados dinamicamente via JavaScript a partir de produtos-data.js -->
+        </div>
+
+        <!-- Botão Ver Mais Produtos Centralizado (Expansão de Produtos) -->
+        <div class="products-section-action text-center">
+          <button type="button" class="btn btn-primary btn-ver-mais" id="btnVerMaisProdutos" aria-expanded="false" aria-controls="homeProductsGrid" aria-label="Visualizar os produtos restantes">
+            <span class="btn-text">Ver mais produtos</span>
+            <i class="fa-solid fa-chevron-down btn-icon" aria-hidden="true"></i>
+          </button>
+          <a href="catalogo.html" class="link-catalogo-inline" aria-label="Ver catálogo completo com filtros de categoria">
+            <span>Explorar catálogo completo</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 5. SEÇÃO EXCLUSIVA: MOSTRUÁRIO DE CAPAS                   -->
+    <!-- ========================================================= -->
+    <section class="capas-section section-padding bg-sage" id="capas">
+      <div class="container">
+        <div class="section-header text-center section-header-reveal">
+          <span class="section-eyebrow">PERSONALIZAÇÃO AFETIVA</span>
+          <h2 class="section-title">Capas para Agendas</h2>
+        </div>
+
+        <!-- Barra de Informações da Vitrine -->
+        <div class="capas-showcase-bar">
+          <div class="capas-live-badge">
+            <i class="fa-solid fa-layer-group" style="color: var(--color-gold);"></i>
+            <span id="capasCounterText">Carregando capas...</span>
+          </div>
+
+          <a href="catalogo.html?categoria=capas" class="btn btn-outline btn-sm capas-full-catalog-link">
+            <span>Ver Catálogo Completo</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Vitrine de Capas (Grade com 16 Cards Visíveis e Mudança Automática) -->
+        <div class="capas-carousel-wrapper" id="capasCarouselWrapper">
+          <div class="capas-grid-16" id="capasGrid16" aria-label="Vitrine de capas para agendas">
+            <!-- Cards renderizados via JS -->
+          </div>
+        </div>
+
+        <!-- Controles Manuais Inferiores para Fácil Navegação -->
+        <div class="capas-footer-navigation">
+          <button type="button" class="btn-capas-nav-pill" id="capasFooterPrevBtn">
+            <i class="fa-solid fa-arrow-left"></i> <span>Anterior</span>
+          </button>
+          <span class="capas-footer-page-indicator" id="capasFooterIndicator">Carregando capas...</span>
+          <button type="button" class="btn-capas-nav-pill" id="capasFooterNextBtn">
+            <span>Próximo</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="capas-showcase-footer text-center">
+          <span class="capas-tip-badge">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Dica: Ao escolher sua capa favorita, anote o modelo para informar no pedido da sua Agenda!
+          </span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================= -->
+    <!-- 6. DIFERENCIAIS DO NOSSO ATELIÊ (Fundo Creme)             -->
+    <!-- ========================================================= -->
+    <section class="differentials-section section-padding bg-cream" id="diferenciais">
+      <div class="container">
+        <div class="section-header text-center section-header-reveal">
+          <span class="section-eyebrow">NOSSA DEDICAÇÃO</span>
+          <h2 class="section-title">Diferenciais do nosso Ateliê</h2>
+          <p class="section-subtitle">
+            Qualidade sem atalhos, respeito ao tempo do processo artesanal e cuidado genuíno com você.
+          </p>
+        </div>
+
+        <div class="differentials-grid">
+          <!-- Diferencial 1 -->
+          <div class="differential-card">
+            <div class="diff-icon">
+              <i class="fa-solid fa-compass-drafting"></i>
+            </div>
+            <h3 class="diff-title">Design Autoral</h3>
+            <p class="diff-desc">Layouts criados do zero, combinando estética minimalista e funcionalidade prática para o seu dia a dia.</p>
+          </div>
+
+          <!-- Diferencial 2 -->
+          <div class="differential-card">
+            <div class="diff-icon">
+              <i class="fa-solid fa-feather-pointed"></i>
+            </div>
+            <h3 class="diff-title">Papéis Nobres</h3>
+            <p class="diff-desc">Folhas pólen de 90g e 120g de toque macio e aveludado, livres de ácido e que não sangram caneta.</p>
+          </div>
+
+          <!-- Diferencial 3 -->
+          <div class="differential-card">
+            <div class="diff-icon">
+              <i class="fa-solid fa-hands-holding-circle"></i>
+            </div>
+            <h3 class="diff-title">Feito à Mão</h3>
+            <p class="diff-desc">Corte, encadernação, colocação de ilhoses e cantoneiras executados artesanalmente com precisão.</p>
+          </div>
+
+          <!-- Diferencial 4 -->
+          <div class="differential-card">
+            <div class="diff-icon">
+              <i class="fa-solid fa-spray-can-sparkles"></i>
+            </div>
+            <h3 class="diff-title">Unboxing Perfumado</h3>
+            <p class="diff-desc">Aroma exclusivo da Lalateliê, papel de seda personalizado, fita de cetim e bilhete escrito à mão.</p>
+          </div>
+
+          <!-- Diferencial 5 -->
+          <div class="differential-card">
+            <div class="diff-icon">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <h3 class="diff-title">Atendimento Próximo</h3>
+            <p class="diff-desc">Conversa direta com a artesã via WhatsApp para alinhar fontes, cores e personalizações sob medida.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 7. SOBRE - JAYCE LARISSA (Apresentação Institucional)     -->
+    <!-- ========================================================= -->
+    <section class="about-section section-padding bg-sage" id="sobre">
+      <span id="corporativo" class="anchor-target" aria-hidden="true"></span>
+      <div class="container about-container">
+        <!-- Coluna Visual / Imagem da Profissional -->
+        <div class="about-image-col">
+          <div class="about-card-frame">
+            <img 
+              src="assets/images/galeria/sobre.jpg" 
+              alt="Jayce Larissa - Fundadora e Artesã da Lalateliê" 
+              class="about-img" 
+              loading="lazy"
+            >
+            <div class="about-badge-pill">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>Fundadora & Artesã</span>
+            </div>
+            <div class="about-experience-card">
+              <div class="about-experience-icon">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <div class="about-experience-text">
+                <strong>Papelaria Afetiva</strong>
+                <small>Feito à mão com propósito</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Textual / Apresentação -->
+        <div class="about-content-col">
+          <div class="about-header-group section-header-reveal">
+            <span class="section-eyebrow">SOBRE O ATELIÊ</span>
+            <h2 class="section-title">Jayce Larissa</h2>
+            <span class="about-role">A mente criativa e o coração por trás da Lalateliê</span>
+          </div>
+
+          <div class="about-bio">
+            <p class="about-paragraph lead">
+              Olá! Sou a <strong>Jayce Larissa</strong>, apaixonada pela arte de transformar papel em refúgio, afeto e memórias inesquecíveis.
+            </p>
+            <p class="about-paragraph">
+              A Lalateliê nasceu do propósito de criar peças artesanais únicas, com respeito ao tempo de produção manual e atenção a cada detalhe. Da curadoria minuciosa de papéis nobres à aplicação em hot stamping dourado e ao unboxing perfumado, cada caderno, planner ou mimo carrega a dedicação de quem ama verdadeiramente o que faz.
+            </p>
+          </div>
+
+          <!-- Pilares da Marca -->
+          <div class="about-highlights-grid">
+            <div class="about-highlight-item">
+              <div class="about-highlight-icon">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div class="about-highlight-info">
+                <h4>Design Autoral</h4>
+                <p>Estética sensível, autêntica e pensada para o seu dia a dia.</p>
+              </div>
+            </div>
+
+            <div class="about-highlight-item">
+              <div class="about-highlight-icon">
+                <i class="fa-solid fa-hands-holding-circle"></i>
+              </div>
+              <div class="about-highlight-info">
+                <h4>100% Feito à Mão</h4>
+                <p>Corte, costura e montagem artesanais com precisão e carinho.</p>
+              </div>
+            </div>
+
+            <div class="about-highlight-item">
+              <div class="about-highlight-icon">
+                <i class="fa-solid fa-gem"></i>
+              </div>
+              <div class="about-highlight-info">
+                <h4>Acabamento Nobre</h4>
+                <p>Gravações douradas, papéis suaves e unboxing perfumado.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assinatura e Chamada para Ação -->
+          <div class="about-footer-row">
+            <div class="about-signature-block">
+              <span class="about-signature-text">Jayce Larissa</span>
+              <span class="about-signature-sub">Criadora & Artesã • Lalateliê</span>
+            </div>
+
+            <div class="about-actions">
+              <a href="https://wa.me/5533999774017?text=Ol%C3%A1%2C%20Jayce!%20Gostaria%20de%20conversar%20sobre%20um%20pedido%20personalizado." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Falar com a Jayce</span>
+              </a>
+              <a href="catalogo.html" class="btn btn-outline">
+                <span>Conhecer Criações</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 8. DEPOIMENTOS DE CLIENTES APAIXONADOS                    -->
+    <!-- ========================================================= -->
+    <section class="testimonials-section section-padding" id="depoimentos">
+      <div class="container">
+        <div class="section-header text-center section-header-reveal">
+          <span class="section-eyebrow">DEPOIMENTOS REAIS</span>
+          <h2 class="section-title">Quem compra, se apaixona</h2>
+          <p class="section-subtitle">
+            Mais de 1.800 clientes com rotinas organizadas e cheias de beleza pelo Brasil.
+          </p>
+        </div>
+
+        <div class="testimonials-carousel-wrapper" id="testimonialsCarouselWrapper" aria-roledescription="carousel" aria-label="Depoimentos de clientes">
+          <div class="testimonials-grid" id="testimonialsTrack">
+            <!-- Depoimento 1 -->
+            <div class="testimonial-card">
+              <div class="stars-row" aria-label="Classificação de 5 estrelas">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "Fiquei emocionada quando a caixa chegou! O cheirinho de ateliê, o laço perfeito e a gravação em hot stamping do meu nome na capa... É uma verdadeira obra de arte."
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Mariana Salles" class="author-avatar" loading="lazy">
+                <div class="author-details">
+                  <span class="author-name">Mariana Salles</span>
+                  <span class="author-location">São Paulo, SP • Planner Anual</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Depoimento 2 -->
+            <div class="testimonial-card">
+              <div class="stars-row" aria-label="Classificação de 5 estrelas">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "A gramatura do papel é sensacional. Escrevo com caneta tinteiro e marcador e não vaza nada para o outro lado da folha. Uso todos os dias para planejar meus atendimentos."
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" alt="Camila Ribeiro" class="author-avatar" loading="lazy">
+                <div class="author-details">
+                  <span class="author-name">Camila Ribeiro</span>
+                  <span class="author-location">Curitiba, PR • Caderno Wire-o</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Depoimento 3 -->
+            <div class="testimonial-card">
+              <div class="stars-row" aria-label="Classificação de 5 estrelas">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "Encomendei os calendários botânicos para presentear minhas clientes no fim de ano e todas ficaram apaixonadas pela base de madeira e pela delicadeza das ilustrações!"
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" alt="Juliana Morais" class="author-avatar" loading="lazy">
+                <div class="author-details">
+                  <span class="author-name">Juliana Morais</span>
+                  <span class="author-location">Belo Horizonte, MG • Calendários</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Depoimento 4 -->
+            <div class="testimonial-card">
+              <div class="stars-row" aria-label="Classificação de 5 estrelas">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "O atendimento da artesã é maravilhoso. Ela me enviou fotos da capa antes de fechar a costura para eu aprovar a cor da fita. Já é o terceiro ano consecutivo que peço meu planner aqui!"
+              </p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Beatriz Lima" class="author-avatar" loading="lazy">
+                <div class="author-details">
+                  <span class="author-name">Beatriz Lima</span>
+                  <span class="author-location">Rio de Janeiro, RJ • Agenda Diária</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles de Navegação Exclusivos para Mobile -->
+          <div class="testimonials-mobile-controls" id="testimonialsControls" aria-label="Navegação dos depoimentos">
+            <button type="button" class="testimonial-nav-btn prev-btn" id="testimonialPrevBtn" aria-label="Depoimento anterior" title="Depoimento anterior">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="testimonials-dots" id="testimonialsDots" role="tablist" aria-label="Indicadores dos depoimentos">
+              <button type="button" class="testimonial-dot active" data-index="0" role="tab" aria-selected="true" aria-label="Ir para depoimento 1"></button>
+              <button type="button" class="testimonial-dot" data-index="1" role="tab" aria-selected="false" aria-label="Ir para depoimento 2"></button>
+              <button type="button" class="testimonial-dot" data-index="2" role="tab" aria-selected="false" aria-label="Ir para depoimento 3"></button>
+              <button type="button" class="testimonial-dot" data-index="3" role="tab" aria-selected="false" aria-label="Ir para depoimento 4"></button>
+            </div>
+            <button type="button" class="testimonial-nav-btn next-btn" id="testimonialNextBtn" aria-label="Próximo depoimento" title="Próximo depoimento">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 9. FORMULÁRIO DE ORÇAMENTO / PERSONALIZAÇÃO              -->
+    <!-- ========================================================= -->
+    <section class="form-section section-padding bg-sage" id="contato">
+      <div class="container form-container">
+        <div class="budget-card">
+          <div class="budget-card-header text-center section-header-reveal">
+            <span class="section-eyebrow">VAMOS CRIAR JUNTOS</span>
+            <h2 class="budget-card-title">Solicite um orçamento personalizado</h2>
+            <p class="budget-card-subtitle">
+              Preencha os campos abaixo e entraremos em contato rapidamente com uma proposta e prévia digital da sua peça.
+            </p>
+          </div>
+
+          <form class="budget-form" id="budgetForm" novalidate action="https://formsubmit.co/personalizadoslalatelie@gmail.com" method="POST">
+            <!-- Campo Honeypot para Proteção Anti-Spam (invisível para humanos) -->
+            <input type="text" name="_honey" id="formHoney" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!-- Parâmetros de Configuração do FormSubmit -->
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" id="formHiddenSubject" value="Novo contato pelo site | Papelaria Personalizada Lalatelie">
+            <input type="hidden" name="_autoresponse" value="Olá! Agradecemos por entrar em contato com a Papelaria Personalizada Lalatelie.&#10;&#10;Recebemos sua mensagem com sucesso e agradecemos pelo interesse em nossos produtos personalizados.&#10;&#10;Nossa equipe analisará sua solicitação e retornará assim que possível.&#10;&#10;Atenciosamente,&#10;Equipe Lalatelie&#10;Papelaria Personalizada">
+
+            <div class="form-grid">
+              <!-- Nome -->
+              <div class="form-group">
+                <label for="clientName" class="form-label">Nome Completo *</label>
+                <div class="input-wrap">
+                  <i class="fa-regular fa-user form-icon" aria-hidden="true"></i>
+                  <input type="text" id="clientName" name="name" class="form-input" placeholder="Seu nome completo" required autocomplete="name" aria-describedby="nameError">
+                </div>
+                <span class="form-error" id="nameError" role="alert">Por favor, informe seu nome (mínimo de 3 caracteres).</span>
+              </div>
+
+              <!-- E-mail -->
+              <div class="form-group">
+                <label for="clientEmail" class="form-label">E-mail *</label>
+                <div class="input-wrap">
+                  <i class="fa-regular fa-envelope form-icon" aria-hidden="true"></i>
+                  <input type="email" id="clientEmail" name="email" class="form-input" placeholder="seuemail@exemplo.com" required autocomplete="email" aria-describedby="emailError">
+                </div>
+                <span class="form-error" id="emailError" role="alert">Informe um e-mail válido para resposta.</span>
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="form-group">
+                <label for="clientPhone" class="form-label">WhatsApp com DDD *</label>
+                <div class="input-wrap">
+                  <i class="fa-brands fa-whatsapp form-icon" aria-hidden="true"></i>
+                  <input type="tel" id="clientPhone" name="phone" class="form-input" placeholder="(11) 99999-9999" required maxlength="15" autocomplete="tel" aria-describedby="phoneError">
+                </div>
+                <span class="form-error" id="phoneError" role="alert">Informe um número de WhatsApp com DDD.</span>
+              </div>
+
+              <!-- Assunto -->
+              <div class="form-group">
+                <label for="clientSubject" class="form-label">Assunto *</label>
+                <div class="input-wrap">
+                  <i class="fa-regular fa-comment-dots form-icon" aria-hidden="true"></i>
+                  <input type="text" id="clientSubject" name="subject" class="form-input" placeholder="Motivo do contato ou orçamento" required aria-describedby="subjectError">
+                </div>
+                <span class="form-error" id="subjectError" role="alert">Por favor, informe o assunto da mensagem.</span>
+              </div>
+
+              <!-- Tipo de Produto -->
+              <div class="form-group">
+                <label for="productSelect" class="form-label">Produto de Interesse</label>
+                <div class="input-wrap">
+                  <i class="fa-regular fa-bookmark form-icon" aria-hidden="true"></i>
+                  <select id="productSelect" name="produto" class="form-input">
+                    <option value="Dúvida Geral / Outro">Dúvida Geral / Outro</option>
+                    <option value="Agendas" selected>Agendas</option>
+                    <option value="Encadernação">Encadernação</option>
+                    <option value="Calendários de Mesa">Calendários de Mesa</option>
+                    <option value="Tags e Etiquetas">Tags e Etiquetas</option>
+                    <option value="Outros Modelos Sob Medida">Outros Modelos Sob Medida</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quantidade -->
+              <div class="form-group">
+                <label for="itemQuantity" class="form-label">Quantidade Estimada</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-arrow-up-1-9 form-icon" aria-hidden="true"></i>
+                  <input type="number" id="itemQuantity" name="quantidade" class="form-input" min="1" max="1000" value="1">
+                </div>
+              </div>
+
+              <!-- Tipo de Personalização -->
+              <div class="form-group full-width">
+                <label for="customType" class="form-label">Tipo de personalização desejado</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-wand-magic-sparkles form-icon" aria-hidden="true"></i>
+                  <select id="customType" name="personalizacao" class="form-input">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="Nome personalizado na capa">Nome personalizado na capa</option>
+                    <option value="Iniciais personalizadas">Iniciais personalizadas</option>
+                    <option value="Frase inspiradora na capa">Frase inspiradora na capa</option>
+                    <option value="Aplicação de logotipo corporativo">Aplicação de logotipo corporativo</option>
+                    <option value="Personalização exclusiva de capa">Personalização exclusiva de capa</option>
+                    <option value="Outro tipo de personalização">Outro tipo de personalização</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Mensagem / Conteúdo -->
+              <div class="form-group full-width">
+                <label for="clientMessage" class="form-label">Mensagem *</label>
+                <div class="input-wrap">
+                  <textarea id="clientMessage" name="message" class="form-input form-textarea" rows="4" placeholder="Escreva aqui sua mensagem, detalhes do pedido ou dúvidas..." required aria-describedby="messageError"></textarea>
+                </div>
+                <span class="form-error" id="messageError" role="alert">Por favor, escreva sua mensagem (mínimo de 10 caracteres).</span>
+              </div>
+            </div>
+
+            <!-- Caixa de Alerta de Erro de Envio (oculta por padrão) -->
+            <div class="form-alert-box form-alert-error" id="formErrorAlert" role="alert" style="display: none;">
+              <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+              <div class="alert-content">
+                <strong>Não foi possível enviar sua mensagem no momento.</strong>
+                <p id="formErrorText">Verifique sua conexão ou tente novamente em instantes. Se preferir, você também pode nos contatar via WhatsApp.</p>
+              </div>
+            </div>
+
+            <!-- Botão de Envio -->
+            <div class="form-footer">
+              <button type="submit" class="btn btn-primary btn-lg btn-submit" id="submitBtn">
+                <span>Enviar mensagem</span>
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              </button>
+              <div class="form-trust-badge">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                <span>Seus dados estão protegidos. Respondemos em até 24 horas úteis.</span>
+              </div>
+            </div>
+          </form>
+
+          <!-- Mensagem de Sucesso (Oculta por padrão) -->
+          <div class="form-success-box" id="formSuccess">
+            <div class="success-icon">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            </div>
+            <h3 class="success-title">Mensagem enviada com sucesso!</h3>
+            <p class="success-desc">
+              Recebemos sua mensagem! Ela foi encaminhada diretamente para nossa equipe e retornaremos o mais breve possível com todo carinho.
+            </p>
+            <button type="button" class="btn btn-outline" id="resetFormBtn">Enviar outra mensagem</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 10. BANNER FINAL CALL-TO-ACTION (VERDE OLIVA PROFUNDO)     -->
+    <!-- ========================================================= -->
+    <section class="final-cta-section" id="cta-final">
+      <div class="final-cta-pattern"></div>
+      <div class="container final-cta-container text-center section-header-reveal">
+        <div class="cta-pill">
+          <span>VAMOS CRIAR JUNTOS?</span>
+        </div>
+        <h2 class="final-cta-title">Vamos criar algo especial para você?</h2>
+        <p class="final-cta-subtitle">
+          Transforme suas anotações, planos e memórias em itens de papelaria artesanal repletos de significado e beleza.
+        </p>
+        <div class="final-cta-actions">
+          <a href="https://wa.me/5533999774017?text=Ol%C3%A1%2C%20Lalateli%C3%AA!%20Gostaria%20de%20solicitar%20um%20projeto%20de%20papelaria%20personalizado." target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-lg">
+            <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp agora
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 11. RODAPÉ INSTITUCIONAL                                  -->
+  <!-- ========================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!-- Coluna 1: Marca & Manifesto -->
+      <div class="footer-col footer-brand-col">
+        <a href="#hero" class="brand-logo footer-logo" aria-label="Lalateliê Página Inicial">
+          <img src="assets/images/logo/logo.png" alt="Lalateliê - Personalizando Momentos" class="brand-logo-img footer-logo-img">
+        </a>
+        <p class="footer-about">
+          Papelaria afetiva e encadernação artesanal feita à mão com amor, rigor e delicadeza. Cada peça carrega uma história única pensada para transformar a sua rotina.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/lalatelie_personalizados" target="_blank" rel="noopener noreferrer" aria-label="Instagram @lalatelie_personalizados"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/jayce.larissa" target="_blank" rel="noopener noreferrer" aria-label="Facebook Larissa Lalateliê"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Coluna 2: Navegação Rápida -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Navegação</h3>
+        <ul class="footer-links">
+          <li><a href="#hero">Início</a></li>
+          <li><a href="catalogo.html">Catálogo de Produtos</a></li>
+          <li><a href="#capas">Capas para Agendas</a></li>
+          <li><a href="#diferenciais">Nossos Diferenciais</a></li>
+          <li><a href="#sobre">Sobre a Criadora</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Atendimento & Horários -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Atendimento</h3>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="fa-regular fa-clock"></i>
+            <span>Segunda a Sexta: 09h às 18h</span>
+          </li>
+          <li>
+            <i class="fa-regular fa-envelope"></i>
+            <a href="mailto:personalizadoslalatelie@gmail.com">personalizadoslalatelie@gmail.com</a>
+          </li>
+          <li>
+            <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/5533999774017" target="_blank" rel="noopener noreferrer">(33) 99977-4017</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Ateliê em Ipatinga, MG • Enviamos para todo o Brasil</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Coluna 4: Pagamento & Segurança -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Formas de Pagamento</h3>
+        <p class="footer-subtext">Aproveite 5% de desconto no Pix ou parcele no cartão.</p>
+        <div class="payment-methods">
+          <span class="pay-badge"><i class="fa-brands fa-pix"></i> Pix</span>
+          <span class="pay-badge"><i class="fa-regular fa-credit-card"></i> Cartões</span>
+          <span class="pay-badge"><i class="fa-solid fa-barcode"></i> Boleto</span>
+        </div>
+        <div class="security-badge">
+          <i class="fa-solid fa-lock"></i>
+          <span>Ambiente 100% Seguro & Protegido</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Direitos Autorais -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <p class="copyright-text">
+          &copy; 2026 Lalateliê Papelaria Afetiva & Artesanal. Todos os direitos reservados.
+        </p>
+        <p class="designer-text">
+          Feito com afeto e carinho manual.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- 12. BOTÕES FLUTUANTES (SCROLLTOP, INSTAGRAM, WHATSAPP)    -->
+  <!-- Ordem visual vertical (de baixo para cima):               -->
+  <!--   1. WhatsApp (inferior)                                  -->
+  <!--   2. Instagram (meio)                                     -->
+  <!--   3. ScrollTop (superior)                                 -->
+  <!-- ========================================================= -->
+  <!-- 3. Botão Scroll to Top (Superior) -->
+  <button type="button" class="btn-scroll-top" id="btnScrollTop" aria-label="Voltar ao topo da página" title="Voltar ao topo">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- 2. Botão Flutuante do Instagram (Meio) -->
+  <div class="floating-instagram" id="floatingInstagram">
+    <a href="https://www.instagram.com/lalatelie_personalizados" target="_blank" rel="noopener noreferrer" class="instagram-btn" aria-label="Visite nosso Instagram @lalatelie_personalizados" title="Instagram @lalatelie_personalizados">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+      <span class="instagram-pulse"></span>
+    </a>
+  </div>
+
+  <!-- 1. Botão Flutuante do WhatsApp (Inferior) -->
+  <div class="floating-whatsapp" id="floatingWhatsapp">
+    <a href="https://wa.me/5533999774017?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20Lalateli%C3%AA!" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Falar conosco no WhatsApp" title="Falar no WhatsApp">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span class="whatsapp-pulse"></span>
+    </a>
+  </div>
+
+
+  <!-- ========================================================= -->
+  <!-- MODAL LIGHTBOX PARA VISUALIZAÇÃO AMPLIADA DAS CAPAS       -->
+  <!-- Estrutura, classes e IDs reutilizados do catalogo.html    -->
+  <!-- ========================================================= -->
+  <div class="capa-lightbox-overlay" id="capaLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="capa-lightbox-card">
+      <button type="button" class="capa-lightbox-close" id="capaLightboxClose" aria-label="Fechar visualização da capa">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="capa-lightbox-media" id="capaLightboxMedia">
+        <button type="button" class="capa-lightbox-nav capa-lightbox-prev" id="capaLightboxPrev" aria-label="Capa anterior" title="Capa anterior (Arraste ou Seta esquerda)">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <img src="" alt="Capa Ampliada Lalateliê" id="capaLightboxImg" class="capa-lightbox-img">
+        <button type="button" class="capa-lightbox-nav capa-lightbox-next" id="capaLightboxNext" aria-label="Próxima capa" title="Próxima capa (Arraste ou Seta direita)">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <div class="capa-lightbox-gesture-hint" aria-hidden="true">
+          <i class="fa-solid fa-arrows-left-right"></i>
+          <span>Arraste para navegar</span>
+        </div>
+      </div>
+      <div class="capa-lightbox-footer">
+        <div class="capa-lightbox-info">
+          <div class="capa-lightbox-tag-row">
+            <span class="capa-lightbox-tag">Capas para Agendas • Lalateliê</span>
+            <span class="capa-lightbox-counter" id="capaLightboxCounter">01 / 34</span>
+          </div>
+          <h3 class="capa-lightbox-title" id="capaLightboxTitle">Opção de Capa</h3>
+        </div>
+        <div class="capa-lightbox-actions">
+          <div class="capa-lightbox-models-section">
+            <span class="capa-models-heading">
+              <i class="fa-solid fa-book-bookmark"></i>
+              <span>Escolha o modelo com esta capa:</span>
+            </span>
+            <div class="capa-models-grid" id="capaLightboxModels">
+              <a href="produto.html?id=agenda-master&categoria=planners" class="btn-capa-model-choice" data-model="agenda-master" title="Escolher com Agenda Master 1 dia por página">
+                <span class="model-badge">1 dia / pág.</span>
+                <span class="model-name">Master 1 dia por página</span>
+              </a>
+              <a href="produto.html?id=agenda-master-2dias&categoria=planners" class="btn-capa-model-choice" data-model="agenda-master-2dias" title="Escolher com Agenda Master 2 dias por página">
+                <span class="model-badge">2 dias / pág.</span>
+                <span class="model-name">Master 2 dias por página</span>
+              </a>
+              <a href="produto.html?id=agenda-minimalista&categoria=planners" class="btn-capa-model-choice" data-model="agenda-minimalista" title="Escolher com Agenda Mine 1 dia por página">
+                <span class="model-badge">A6 • 1 dia / pág.</span>
+                <span class="model-name">Mine 1 dia por página</span>
+              </a>
+              <a href="produto.html?id=agenda-mine-2dias&categoria=planners" class="btn-capa-model-choice" data-model="agenda-mine-2dias" title="Escolher com Agenda Mine 2 dias por página">
+                <span class="model-badge">A6 • 2 dias / pág.</span>
+                <span class="model-name">Mine 2 dias por página</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- TOAST NOTIFICATION                                        -->
+  <!-- ========================================================= -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="assertive">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="toast-message" id="toastMessage">Ação realizada com sucesso!</span>
+  </div>
+
+
+
+  <!-- Base de Dados Compartilhada dos Produtos -->
+  <script src="assets/js/produtos-data.js?v=16"></script>
+
+  <!-- Módulo do Carrinho de Compras -->
+  <script src="assets/js/carrinho.js?v=5" defer></script>
+
+  <!-- Script Principal -->
+  <script src="assets/js/script.js?v=18"></script>
+
+  <!-- Botão Scroll Top -->
+  <script src="assets/js/scroll-top.js" defer></script>
+</body>
+</html>

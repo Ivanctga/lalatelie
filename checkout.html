@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalização de Compra Segura | Lalateliê Papelaria Afetiva</title>
+  <meta name="description" content="Finalize seu pedido com total segurança, transparência e personalização exclusiva na Lalateliê Papelaria Afetiva.">
+  <meta name="author" content="Lalateliê">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+
+  <!-- Google Fonts: Cormorant Garamond, Alex Brush e Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Estilos Gerais, Carrinho e Checkout Exclusivo -->
+  <link rel="stylesheet" href="assets/css/style.css?v=19">
+  <link rel="stylesheet" href="assets/css/carrinho.css?v=4">
+  <link rel="stylesheet" href="assets/css/checkout.css?v=3">
+</head>
+<body class="checkout-page-body">
+
+  <!-- ========================================================= -->
+  <!-- 1. CABEÇALHO DO CHECKOUT (SIMPLIFICADO & SEGURO)          -->
+  <!-- ========================================================= -->
+  <header class="checkout-header" id="checkoutHeader">
+    <div class="checkout-header-container">
+      <!-- Logotipo com Retorno à Loja -->
+      <a href="index.html" class="checkout-brand" aria-label="Lalateliê - Página Inicial">
+        <img src="assets/images/logo/logo.png" alt="Lalateliê - Papelaria Afetiva" class="checkout-brand-img">
+      </a>
+
+      <!-- Selo de Ambiente Seguro -->
+      <div class="checkout-security-badge">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        <span>Ambiente 100% Seguro • Criptografia SSL 256-bit</span>
+      </div>
+
+      <!-- Link para Retornar ao Catálogo -->
+      <a href="catalogo.html" class="checkout-return-link">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <span>Continuar Comprando</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Barra de Resumo para Celulares (Colapsável) -->
+  <aside class="mobile-summary-bar" id="mobileSummaryBar" aria-label="Resumo do pedido para celular">
+    <div class="mobile-summary-toggle">
+      <div class="mobile-summary-left">
+        <i class="fa-solid fa-bag-shopping" style="color: var(--color-gold);"></i>
+        <span>Ver resumo do pedido (<span id="mobileSummaryCount">0 itens</span>)</span>
+        <i class="fa-solid fa-chevron-down mobile-summary-icon-arrow" aria-hidden="true"></i>
+      </div>
+      <div class="mobile-summary-right" id="mobileSummaryTotal">
+        R$ 0,00
+      </div>
+    </div>
+  </aside>
+  <div class="mobile-summary-dropdown" id="mobileSummaryDropdown">
+    <div id="mobileSummaryItems"></div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 2. CONTEÚDO PRINCIPAL DO CHECKOUT                         -->
+  <!-- ========================================================= -->
+  <main class="checkout-main-content">
+    <div class="checkout-container">
+
+      <!-- Indicador de Progresso (Stepper com as 3 Etapas) -->
+      <nav class="checkout-stepper-wrapper" aria-label="Progresso da Compra">
+        <div class="checkout-stepper" id="checkoutStepper">
+          
+          <!-- Passo 1: Pedido -->
+          <button type="button" class="stepper-step active" data-step="1" id="stepIndicator1">
+            <span class="stepper-number">1</span>
+            <div class="stepper-info">
+              <span class="stepper-tag">Etapa 01</span>
+              <span class="stepper-title">Revisão do Pedido</span>
+            </div>
+          </button>
+
+          <div class="stepper-line" id="stepperLine1"></div>
+
+          <!-- Passo 2: Seus Dados -->
+          <button type="button" class="stepper-step" data-step="2" id="stepIndicator2">
+            <span class="stepper-number">2</span>
+            <div class="stepper-info">
+              <span class="stepper-tag">Etapa 02</span>
+              <span class="stepper-title">Seus Dados & Entrega</span>
+            </div>
+          </button>
+
+          <div class="stepper-line" id="stepperLine2"></div>
+
+          <!-- Passo 3: Pagamento -->
+          <button type="button" class="stepper-step" data-step="3" id="stepIndicator3">
+            <span class="stepper-number">3</span>
+            <div class="stepper-info">
+              <span class="stepper-tag">Etapa 03</span>
+              <span class="stepper-title">Pagamento & Revisão</span>
+            </div>
+          </button>
+
+        </div>
+      </nav>
+
+      <!-- Layout em Grid (2 Colunas Desktop) -->
+      <div class="checkout-grid-layout">
+
+        <!-- Coluna Esquerda: Conteúdo das Etapas -->
+        <section class="checkout-steps-container">
+
+          <!-- -------------------------------------------------------- -->
+          <!-- ETAPA 1: REVISÃO DO PEDIDO                              -->
+          <!-- -------------------------------------------------------- -->
+          <div class="checkout-step-panel active" id="stepOrder">
+            <header class="step-header">
+              <h1 class="step-heading">
+                <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+                Revisão do Seu Pedido
+              </h1>
+              <p class="step-subtitle">Confira os itens artesanais, quantidades e personalizações antes de prosseguir:</p>
+            </header>
+
+            <!-- Lista de Produtos Recuperados do Carrinho -->
+            <div class="checkout-items-list" id="checkoutItemsList">
+              <!-- Injetado dinamicamente via checkout.js -->
+            </div>
+
+            <!-- Estado de Carrinho Vazio -->
+            <div class="checkout-empty-state" id="checkoutEmptyState" style="display: none;">
+              <div class="checkout-empty-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+              <h2 class="checkout-empty-title">Seu carrinho está vazio</h2>
+              <p class="checkout-empty-text">Você ainda não escolheu seus produtos artesanais. Acesse nosso catálogo para conferir as agendas, cadernos e calendários exclusivos do Lalateliê!</p>
+              <a href="catalogo.html" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-book-open"></i> Explorar Catálogo Completo
+              </a>
+            </div>
+
+            <!-- Nota Informativa de Frete e Produção Manual -->
+            <div class="checkout-shipping-note-box" id="checkoutShippingNoteBox">
+              <i class="fa-solid fa-truck-fast"></i>
+              <div>
+                <strong>Frete e Prazo de Entrega:</strong>
+                <span>Produção artesanal sob encomenda • O valor e envio são combinados diretamente com o Ateliê via WhatsApp.</span>
+              </div>
+            </div>
+
+            <!-- Ações da Etapa 1 -->
+            <div class="step-navigation-actions">
+              <a href="catalogo.html" class="btn-step-prev">
+                <i class="fa-solid fa-arrow-left"></i> Continuar Comprando
+              </a>
+              <button type="button" class="btn-step-next" id="btnStep1Next">
+                <span>Continuar para Meus Dados</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- -------------------------------------------------------- -->
+          <!-- ETAPA 2: SEUS DADOS & ENTREGA                           -->
+          <!-- -------------------------------------------------------- -->
+          <div class="checkout-step-panel" id="stepCustomer">
+            <header class="step-header">
+              <h2 class="step-heading">
+                <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                Seus Dados & Endereço de Entrega
+              </h2>
+              <p class="step-subtitle">Precisamos dessas informações para identificar sua encomenda e enviar seus produtos com carinho:</p>
+            </header>
+
+            <form id="checkoutCustomerForm" novalidate>
+              
+              <!-- Seção 1: Dados Pessoais -->
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-user-circle"></i> Dados Pessoais
+              </h3>
+
+              <div class="form-grid-row">
+                <div class="form-group">
+                  <label for="custNome" class="form-label">
+                    Nome Completo <span class="req">*</span>
+                  </label>
+                  <input type="text" id="custNome" class="form-control" placeholder="Ex: Maria Silva Oliveira" required autocomplete="name">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe nome e sobrenome completos.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="custEmail" class="form-label">
+                    E-mail <span class="req">*</span>
+                  </label>
+                  <input type="email" id="custEmail" class="form-control" placeholder="seuemail@exemplo.com" required autocomplete="email">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe um e-mail válido.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-row">
+                <div class="form-group">
+                  <label for="custTelefone" class="form-label">
+                    Telefone / WhatsApp <span class="req">*</span>
+                  </label>
+                  <input type="tel" id="custTelefone" class="form-control" placeholder="(00) 00000-0000" maxlength="15" required autocomplete="tel">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe um número de WhatsApp com DDD.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="custCpf" class="form-label">
+                    CPF <span class="opt">(Opcional para NF)</span>
+                  </label>
+                  <input type="text" id="custCpf" class="form-control" placeholder="000.000.000-00" maxlength="14">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> CPF inválido.</span>
+                </div>
+              </div>
+
+              <!-- Seção 2: Endereço de Entrega -->
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-map-location-dot"></i> Endereço de Entrega
+              </h3>
+
+              <div class="form-grid-row col-cep-row">
+                <div class="form-group">
+                  <label for="custCep" class="form-label">
+                    CEP <span class="req">*</span>
+                  </label>
+                  <div class="form-input-wrapper">
+                    <input type="text" id="custCep" class="form-control" placeholder="00000-000" maxlength="9" required autocomplete="postal-code">
+                    <i class="fa-solid fa-magnifying-glass form-control-icon"></i>
+                  </div>
+                  <div class="cep-loading-indicator" id="cepLoadingIndicator">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Buscando endereço no ViaCEP...
+                  </div>
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe um CEP com 8 dígitos.</span>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--color-text-muted); padding-bottom: 8px;">
+                  <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--color-gold);"></i> Preenchimento automático de rua, bairro e cidade pelo CEP.
+                </div>
+              </div>
+
+              <div class="form-grid-row col-address-main">
+                <div class="form-group">
+                  <label for="custRua" class="form-label">
+                    Rua / Logradouro <span class="req">*</span>
+                  </label>
+                  <input type="text" id="custRua" class="form-control" placeholder="Nome da rua ou avenida" required autocomplete="address-line1">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe o logradouro.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="custNumero" class="form-label">
+                    Número <span class="req">*</span>
+                  </label>
+                  <input type="text" id="custNumero" class="form-control" placeholder="Ex: 123 ou S/N" required>
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Obrigatório.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-row col-3">
+                <div class="form-group">
+                  <label for="custComplemento" class="form-label">
+                    Complemento <span class="opt">(Opcional)</span>
+                  </label>
+                  <input type="text" id="custComplemento" class="form-control" placeholder="Apto, Bloco, Casa..." autocomplete="address-line2">
+                </div>
+
+                <div class="form-group">
+                  <label for="custBairro" class="form-label">
+                    Bairro <span class="req">*</span>
+                  </label>
+                  <input type="text" id="custBairro" class="form-control" placeholder="Seu bairro" required>
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe o bairro.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="custCidade" class="form-label">
+                    Cidade <span class="req">*</span>
+                  </label>
+                  <input type="text" id="custCidade" class="form-control" placeholder="Sua cidade" required autocomplete="address-level2">
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe a cidade.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-row">
+                <div class="form-group">
+                  <label for="custUf" class="form-label">
+                    Estado (UF) <span class="req">*</span>
+                  </label>
+                  <select id="custUf" class="form-control" required autocomplete="address-level1">
+                    <option value="">Selecione a UF</option>
+                    <option value="AC">Acre (AC)</option>
+                    <option value="AL">Alagoas (AL)</option>
+                    <option value="AP">Amapá (AP)</option>
+                    <option value="AM">Amazonas (AM)</option>
+                    <option value="BA">Bahia (BA)</option>
+                    <option value="CE">Ceará (CE)</option>
+                    <option value="DF">Distrito Federal (DF)</option>
+                    <option value="ES">Espírito Santo (ES)</option>
+                    <option value="GO">Goiás (GO)</option>
+                    <option value="MA">Maranhão (MA)</option>
+                    <option value="MT">Mato Grosso (MT)</option>
+                    <option value="MS">Mato Grosso do Sul (MS)</option>
+                    <option value="MG">Minas Gerais (MG)</option>
+                    <option value="PA">Pará (PA)</option>
+                    <option value="PB">Paraíba (PB)</option>
+                    <option value="PR">Paraná (PR)</option>
+                    <option value="PE">Pernambuco (PE)</option>
+                    <option value="PI">Piauí (PI)</option>
+                    <option value="RJ">Rio de Janeiro (RJ)</option>
+                    <option value="RN">Rio Grande do Norte (RN)</option>
+                    <option value="RS">Rio Grande do Sul (RS)</option>
+                    <option value="RO">Rondônia (RO)</option>
+                    <option value="RR">Roraima (RR)</option>
+                    <option value="SC">Santa Catarina (SC)</option>
+                    <option value="SP">São Paulo (SP)</option>
+                    <option value="SE">Sergipe (SE)</option>
+                    <option value="TO">Tocantins (TO)</option>
+                  </select>
+                  <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Selecione o estado.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="custObs" class="form-label">
+                    Ponto de Referência / Notas <span class="opt">(Opcional)</span>
+                  </label>
+                  <input type="text" id="custObs" class="form-control" placeholder="Ex: Próximo à praça central">
+                </div>
+              </div>
+
+            </form>
+
+            <!-- Ações da Etapa 2 -->
+            <div class="step-navigation-actions">
+              <button type="button" class="btn-step-prev" id="btnStep2Prev">
+                <i class="fa-solid fa-arrow-left"></i> Voltar ao Pedido
+              </button>
+              <button type="button" class="btn-step-next" id="btnStep2Next">
+                <span>Continuar para Pagamento</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- -------------------------------------------------------- -->
+          <!-- ETAPA 3: FORMA DE PAGAMENTO & REVISÃO FINAL             -->
+          <!-- -------------------------------------------------------- -->
+          <div class="checkout-step-panel" id="stepPayment">
+            <header class="step-header">
+              <h2 class="step-heading">
+                <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
+                Escolha a Forma de Pagamento
+              </h2>
+              <p class="step-subtitle">Selecione o método de pagamento seguro para finalizar sua encomenda afetiva:</p>
+            </header>
+
+            <div class="payment-methods-selector">
+
+              <!-- Opção 1: A Combinar com a Vendedora -->
+              <div class="payment-method-card selected" data-method="combinar">
+                <div class="payment-method-header">
+                  <div class="payment-method-label">
+                    <input type="radio" name="paymentOption" value="combinar" class="payment-method-radio" checked>
+                    <i class="fa-solid fa-comments-dollar payment-method-icon" style="color: var(--color-gold);"></i>
+                    <div class="payment-method-name">
+                      A Combinar com a Vendedora
+                      <span class="payment-badge-vendedora"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+                    </div>
+                  </div>
+                  <span style="font-weight: 700; color: var(--color-olive-primary); font-size: 0.92rem;">Atendimento Direto</span>
+                </div>
+                <div class="payment-method-body">
+                  <div class="combinar-vendedora-box">
+                    <div class="combinar-vendedora-header">
+                      <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.6rem;"></i>
+                      <div>
+                        <strong>Forma de Pagamento a Combinar</strong>
+                        <p style="margin: 4px 0 0; font-size: 0.88rem; color: var(--color-text-body); line-height: 1.5;">
+                          Você escolhe como prefere pagar diretamente com a nossa artesã! Ao confirmar o pedido, nossa equipe combinará o pagamento (Pix, Cartão de Crédito ou Transferência) diretamente pelo WhatsApp.
+                        </p>
+                      </div>
+                    </div>
+                    <ul class="pix-instructions-list" style="margin-top: 14px;">
+                      <li><i class="fa-solid fa-circle-check" style="color: var(--color-olive-primary);"></i> Sem necessidade de pagamento imediato agora no site.</li>
+                      <li><i class="fa-solid fa-circle-check" style="color: var(--color-olive-primary);"></i> Alinhe detalhes e tire dúvidas antes de efetuar o pagamento.</li>
+                      <li><i class="fa-solid fa-circle-check" style="color: var(--color-olive-primary);"></i> Atendimento acolhedor e humanizado direto com a artesã.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Opção 2: PIX (5% OFF) -->
+              <div class="payment-method-card" data-method="pix">
+                <div class="payment-method-header">
+                  <div class="payment-method-label">
+                    <input type="radio" name="paymentOption" value="pix" class="payment-method-radio">
+                    <i class="fa-brands fa-pix payment-method-icon" style="color: #27ae60;"></i>
+                    <div class="payment-method-name">
+                      PIX Instantâneo
+                      <span class="payment-badge-discount">5% OFF à vista</span>
+                    </div>
+                  </div>
+                  <span style="font-weight: 700; color: #27ae60; font-size: 0.95rem;">Aprovação Imediata</span>
+                </div>
+                <div class="payment-method-body">
+                  <div class="pix-details-box">
+                    <div class="pix-highlight-row">
+                      <span class="pix-highlight-title">
+                        <i class="fa-solid fa-bolt"></i> Total com 5% de Desconto Pix:
+                      </span>
+                      <span class="pix-highlight-value" id="pixHighlightVal">R$ 0,00</span>
+                    </div>
+                    <ul class="pix-instructions-list">
+                      <li><i class="fa-solid fa-circle-check"></i> O QR Code e a chave Pix Copia e Cola serão gerados imediatamente ao finalizar o pedido.</li>
+                      <li><i class="fa-solid fa-circle-check"></i> A confirmação é instantânea e seu pedido entrará em produção prioritária no ateliê.</li>
+                      <li><i class="fa-solid fa-circle-check"></i> Você também receberá uma cópia com o resumo diretamente no WhatsApp.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Opção 2: Cartão de Crédito (Combinar via WhatsApp) -->
+              <div class="payment-method-card" data-method="credit_card">
+                <div class="payment-method-header">
+                  <div class="payment-method-label">
+                    <input type="radio" name="paymentOption" value="credit_card" class="payment-method-radio">
+                    <i class="fa-solid fa-credit-card payment-method-icon"></i>
+                    <div class="payment-method-name">
+                      Cartão de Crédito
+                      <span class="payment-badge-whatsapp"><i class="fa-brands fa-whatsapp"></i> Combinar via WhatsApp</span>
+                    </div>
+                  </div>
+                  <div style="font-size: 1.1rem; color: #747f6a; display: flex; gap: 8px;">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                  </div>
+                </div>
+                <div class="payment-method-body">
+                  <div class="card-whatsapp-box">
+                    <div class="card-whatsapp-header">
+                      <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.6rem;"></i>
+                      <div>
+                        <strong>Pagamento no Cartão via WhatsApp</strong>
+                        <p style="margin: 4px 0 0; font-size: 0.88rem; color: var(--color-text-body); line-height: 1.5;">
+                          Você não precisa digitar seus dados bancários aqui no site! Ao finalizar o pedido, nossa equipe enviará seu link de pagamento seguro ou combinará o parcelamento diretamente pelo WhatsApp.
+                        </p>
+                      </div>
+                    </div>
+                    <ul class="pix-instructions-list" style="margin-top: 14px;">
+                      <li><i class="fa-solid fa-circle-check" style="color: #25d366;"></i> Link de pagamento seguro oficial ou maquininha.</li>
+                      <li><i class="fa-solid fa-circle-check" style="color: #25d366;"></i> Parcelamento em até 3x sem juros (ou conforme combinado com o Ateliê).</li>
+                      <li><i class="fa-solid fa-circle-check" style="color: #25d366;"></i> Atendimento direto e humanizado com a artesã.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Resumo das Informações para Revisão Prévia -->
+            <div class="checkout-review-summary-box">
+              <h3 class="review-summary-title">
+                <i class="fa-solid fa-clipboard-check"></i>
+                Resumo dos Dados da Compra
+              </h3>
+              <div class="review-data-grid" id="checkoutReviewDataGrid">
+                <!-- Injetado via checkout.js -->
+              </div>
+            </div>
+
+            <!-- Ações da Etapa 3 -->
+            <div class="step-navigation-actions">
+              <button type="button" class="btn-step-prev" id="btnStep3Prev">
+                <i class="fa-solid fa-arrow-left"></i> Voltar aos Dados
+              </button>
+              <button type="button" class="btn-step-next" id="btnStep3Finish">
+                <i class="fa-solid fa-lock"></i>
+                <span>Finalizar Pedido</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- -------------------------------------------------------- -->
+          <!-- ETAPA 4: CONFIRMAÇÃO & SUCESSO DO PEDIDO                 -->
+          <!-- -------------------------------------------------------- -->
+          <div class="checkout-step-panel" id="stepSuccess">
+            <div class="checkout-success-card">
+              <div class="success-icon-badge">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h2 class="success-title">Pedido Realizado com Sucesso!</h2>
+              <div class="success-order-num-badge" id="successOrderNumber">#LALA-2026-0000</div>
+              <div>
+                <span class="success-status-pill pix-pending" id="successStatusPill">
+                  <i class="fa-solid fa-clock"></i> Aguardando Pagamento Pix
+                </span>
+              </div>
+
+              <!-- Banner de Confirmação e Envio Automático para o WhatsApp -->
+              <div class="success-whatsapp-redirect-banner" id="successWhatsappRedirectBanner">
+                <i class="fa-brands fa-whatsapp success-whatsapp-banner-icon"></i>
+                <div class="success-whatsapp-banner-info">
+                  <strong class="success-whatsapp-banner-title">Pedido enviado para o WhatsApp da Lalateliê!</strong>
+                  <span class="success-whatsapp-banner-desc">Os dados do seu pedido foram gerados para atendimento direto com a artesã. Se a conversa não abriu automaticamente no WhatsApp, clique no botão verde abaixo.</span>
+                </div>
+              </div>
+
+              <p style="color: var(--color-text-muted); max-width: 520px; margin: 0 auto 28px auto; font-size: 1rem;">
+                Muito obrigada por escolher a Lalateliê! Suas peças serão confeccionadas manualmente com todo carinho e afeto que você merece.
+              </p>
+
+              <!-- Bloco Exclusivo de Pagamento Pix -->
+              <div class="success-pix-payment-box" id="successPixPaymentBox" style="display: none;">
+                <h3 style="font-size: 1.1rem; color: var(--color-olive-dark); font-weight: 700; margin-bottom: 12px;">
+                  <i class="fa-brands fa-pix" style="color: #27ae60;"></i> Pague agora pelo PIX com 5% de Desconto
+                </h3>
+                <p style="font-size: 0.88rem; color: var(--color-text-body); margin-bottom: 18px;">
+                  Abra o aplicativo do seu banco, escolha a opção <strong>PIX</strong> e aponte a câmera para o QR Code abaixo ou utilize o código Copia e Cola:
+                </p>
+
+                <!-- QR Code Ilustrativo Dinâmico -->
+                <div class="pix-qr-container">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=00020126580014BR.GOV.BCB.PIX0136lalatelie.afetiva%40gmail.com5204000053039865802BR5916LALATELIE%20AFETIV6008IPATINGA62070503***6304" alt="QR Code Pix Lalateliê" class="pix-qr-img" id="pixQrImg">
+                </div>
+
+                <!-- Chave Pix Copia e Cola -->
+                <div class="pix-code-copy-box">
+                  <input type="text" readonly id="pixCodeInput" class="pix-code-input" value="00020126580014BR.GOV.BCB.PIX0136lalatelie.afetiva@gmail.com5204000053039865802BR5916LALATELIE AFETIV6008IPATINGA62070503***6304">
+                  <button type="button" class="btn-copy-pix" id="btnCopyPix">
+                    <i class="fa-regular fa-copy"></i> Copiar Código Pix
+                  </button>
+                </div>
+
+                <div class="pix-timer-alert">
+                  <i class="fa-solid fa-stopwatch"></i> Este código é válido pelos próximos <strong>15 minutos</strong>.
+                </div>
+              </div>
+
+              <!-- Bloco Exclusivo de Pagamento a Combinar com a Vendedora -->
+              <div class="success-card-payment-box" id="successCombinarPaymentBox" style="display: none; background: #fbfdfa; border: 1px dashed rgba(71, 83, 59, 0.35); border-radius: 12px; padding: 22px; max-width: 620px; margin: 0 auto 28px auto; text-align: left;">
+                <h3 style="font-size: 1.1rem; color: var(--color-olive-dark); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.3rem;"></i> Pagamento a Combinar com a Vendedora
+                </h3>
+                <p style="font-size: 0.9rem; color: var(--color-text-body); line-height: 1.6; margin: 0;">
+                  Seu pedido foi registrado com sucesso! Para combinar a melhor forma de pagamento (Pix, Cartão de Crédito ou Transferência), clique no botão do WhatsApp abaixo para conversar diretamente com nossa artesã.
+                </p>
+              </div>
+
+              <!-- Bloco Exclusivo de Pagamento Cartão de Crédito via WhatsApp -->
+              <div class="success-card-payment-box" id="successCardPaymentBox" style="display: none; background: #fbfdfa; border: 1px dashed rgba(37, 211, 102, 0.4); border-radius: 12px; padding: 22px; max-width: 620px; margin: 0 auto 28px auto; text-align: left;">
+                <h3 style="font-size: 1.1rem; color: var(--color-olive-dark); font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.3rem;"></i> Link de Pagamento no Cartão via WhatsApp
+                </h3>
+                <p style="font-size: 0.9rem; color: var(--color-text-body); line-height: 1.6; margin: 0;">
+                  Seu pedido foi registrado com sucesso! Para efetuar o pagamento com <strong>Cartão de Crédito</strong>, clique no botão do WhatsApp abaixo para conversar diretamente com nossa artesã e receber o seu link de pagamento seguro oficial.
+                </p>
+              </div>
+
+              <!-- Resumo do Pedido Formatado -->
+              <div id="successOrderSummaryContent" style="background-color: var(--color-cream); border-radius: 12px; padding: 22px; max-width: 620px; margin: 0 auto;">
+                <!-- Preenchido via checkout.js -->
+              </div>
+
+              <!-- Botões de Ação Final -->
+              <div class="success-actions-row">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-success-whatsapp" id="btnSuccessWhatsapp">
+                  <i class="fa-brands fa-whatsapp"></i> Enviar Pedido no WhatsApp da Lalateliê
+                </a>
+                <button type="button" class="btn-success-print" id="btnSuccessPrint">
+                  <i class="fa-solid fa-print"></i> Imprimir Pedido
+                </button>
+                <a href="index.html" class="btn-success-home">
+                  <i class="fa-solid fa-house"></i> Voltar à Loja
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Coluna Direita: Sidebar Fixo de Resumo do Pedido (Desktop) -->
+        <aside class="checkout-order-sidebar">
+          <div class="sidebar-card">
+            <h2 class="sidebar-heading">
+              <span>Resumo do Pedido</span>
+              <i class="fa-solid fa-bag-shopping" style="color: var(--color-gold); font-size: 1.15rem;"></i>
+            </h2>
+
+            <!-- Lista Rápida dos Itens -->
+            <div class="sidebar-items-preview" id="sidebarItemsPreview">
+              <!-- Injetado dinamicamente via checkout.js -->
+            </div>
+
+            <!-- Bloco de Cálculos e Totais -->
+            <div class="sidebar-totals-block">
+              <div class="totals-row">
+                <span>Subtotal dos produtos</span>
+                <strong id="sidebarSubtotal">R$ 0,00</strong>
+              </div>
+              <div class="totals-row">
+                <span>Frete</span>
+                <strong id="sidebarShipping" class="sidebar-shipping-badge">A combinar no WhatsApp</strong>
+              </div>
+              <div class="totals-row discount-row" id="sidebarDiscountRow" style="display: none;">
+                <span>Desconto PIX (5% OFF)</span>
+                <strong id="sidebarDiscount">- R$ 0,00</strong>
+              </div>
+              <div class="totals-row total-highlight">
+                <span>Total a pagar</span>
+                <span id="sidebarTotal">R$ 0,00</span>
+              </div>
+            </div>
+
+            <!-- Selos de Confiança e Garantia -->
+            <div class="sidebar-trust-box">
+              <div class="sidebar-trust-item">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span>Garantia de Confecção Artesanal Lalateliê</span>
+              </div>
+              <div class="sidebar-trust-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Envio rastreado com embalagem perfumada</span>
+              </div>
+              <div class="sidebar-trust-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Suporte humanizado direto com a artesã</span>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 3. RODAPÉ DO CHECKOUT (DISCRETO & INSTITUCIONAL)          -->
+  <!-- ========================================================= -->
+  <footer class="checkout-footer">
+    <div class="checkout-footer-container">
+      <p>© 2026 Lalateliê Papelaria Afetiva & Artesanal. Todos os direitos reservados.</p>
+      <div class="checkout-footer-badges">
+        <span><i class="fa-solid fa-lock"></i> Compra Protegida</span>
+        <span><i class="fa-solid fa-certificate"></i> Qualidade Artesanal</span>
+        <span><i class="fa-solid fa-heart"></i> Feito à Mão com Amor</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts do Catálogo, Carrinho e Motor de Checkout -->
+  <script src="assets/js/produtos-data.js?v=16"></script>
+  <script src="assets/js/carrinho.js?v=5"></script>
+  <script src="assets/js/checkout.js?v=3" defer></script>
+</body>
+</html>

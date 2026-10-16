@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Produto | Lalateliê Papelaria Afetiva</title>
+  <meta name="description" content="Conheça os detalhes, especificações e acabamentos nobres deste produto artesanal exclusivo da Lalateliê Papelaria Afetiva.">
+  <meta name="keywords" content="papelaria artesanal, encadernação nobre, produtos personalizados, lalateliê">
+  <meta name="author" content="Lalateliê">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+
+  <!-- Google Fonts: Cormorant Garamond, Alex Brush e Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Folhas de Estilos Principal, Exclusiva de Produto e Carrinho -->
+  <link rel="stylesheet" href="assets/css/style.css?v=19">
+  <link rel="stylesheet" href="assets/css/produto.css?v=22">
+  <link rel="stylesheet" href="assets/css/carrinho.css?v=4">
+
+  <!-- Base de Dados Compartilhada dos Produtos -->
+  <script src="assets/js/produtos-data.js?v=16"></script>
+
+  <!-- Módulo do Carrinho de Compras -->
+  <script src="assets/js/carrinho.js?v=5" defer></script>
+
+  <!-- Lógica da Página de Detalhes -->
+  <script src="assets/js/produto.js?v=22" defer></script>
+</head>
+<body class="produto-page">
+  <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- ========================================================= -->
+  <!-- 1. CABEÇALHO / NAVEGAÇÃO SUPERIOR                         -->
+  <!-- ========================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <!-- Logotipo -->
+      <a href="index.html#hero" class="brand-logo" aria-label="Lalateliê Página Inicial">
+        <img src="assets/images/logo/logo.png" alt="Lalateliê - Personalizando Momentos" class="brand-logo-img">
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="main-navigation" aria-label="Navegação Principal">
+        <ul class="nav-links">
+          <li><a href="index.html#hero" class="nav-link">Início</a></li>
+          <li><a href="catalogo.html" class="nav-link active">Catálogo</a></li>
+          <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
+          <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Ações do Header -->
+      <div class="header-actions">
+        <button type="button" class="btn-header-cart" id="btnHeaderCart" aria-label="Abrir carrinho de compras" title="Meu Carrinho">
+          <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          <span class="cart-count-badge" id="cartCountBadge">0</span>
+        </button>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Backdrop do Menu Mobile -->
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+
+    <!-- Menu Mobile Lateral Moderno -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Navegação móvel" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <ul class="mobile-nav-links">
+          <li><a href="index.html#hero" class="mobile-nav-link">Início</a></li>
+          <li><a href="catalogo.html" class="mobile-nav-link active">Catálogo</a></li>
+          <li><a href="index.html#sobre" class="mobile-nav-link">Sobre</a></li>
+          <li><a href="index.html#contato" class="mobile-nav-link">Contato</a></li>
+          <li>
+            <a href="#" class="mobile-nav-link mobile-cart-item-link btn-open-cart-drawer">
+              <span class="mobile-cart-label"><i class="fa-solid fa-bag-shopping"></i> Meu Carrinho</span>
+              <span class="cart-count-badge">0</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-menu-cta">
+          <a href="index.html#contato" class="btn btn-primary btn-block">Fazer Pedido Personalizado</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- 2. BARRA DE RETORNO AO CATÁLOGO & BREADCRUMB              -->
+  <!-- ========================================================= -->
+  <section class="produto-nav-bar">
+    <div class="produto-nav-container">
+      <!-- Botão com Preservação de Contexto de Navegação -->
+      <a href="catalogo.html" class="btn-back-catalog" id="btnBackCatalog">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Voltar ao Catálogo</span>
+      </a>
+
+      <!-- Trilha Breadcrumb Dinâmica -->
+      <nav class="produto-breadcrumb" aria-label="Trilha de navegação">
+        <a href="index.html">Início</a>
+        <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
+        <a href="catalogo.html">Catálogo</a>
+        <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
+        <a href="catalogo.html" id="breadcrumbCategoryLink">Categoria</a>
+        <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
+        <span class="current" id="breadcrumbProductName">Carregando produto...</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 3. DETALHES PRINCIPAIS DO PRODUTO (LAYOUT 2 COLUNAS)      -->
+  <!-- ========================================================= -->
+  <main class="produto-detail-section" id="mainContent">
+    <div class="produto-detail-container">
+
+      <!-- Estado: Produto Encontrado e Renderizado -->
+      <div class="produto-layout-grid" id="produtoLayoutGrid">
+
+        <!-- Coluna 1: Imagem Principal em Destaque e Galeria Sticky -->
+        <div class="produto-gallery-col">
+          <div class="produto-gallery-card">
+            <!-- Visor da Imagem Principal -->
+            <div class="produto-main-viewer" id="produtoMainViewer" aria-label="Visor da imagem principal do produto">
+              <span class="produto-badge" id="produtoBadge" style="display: none;">Destaque</span>
+              <img src="" alt="Foto principal do produto" id="produtoMainImg" class="produto-main-img">
+              <!-- Contador de Imagens (ex: 1 / 5) com Glassmorphism -->
+              <div class="produto-counter-badge" id="produtoCounter" aria-live="polite">1 / 5</div>
+            </div>
+
+            <!-- Miniaturas de Imagens do Produto (Abaixo da Imagem Principal) -->
+            <div class="produto-gallery-carousel-section" id="produtoGallerySection" aria-label="Miniaturas de fotos do produto">
+              <div class="produto-thumbnails-viewport" id="produtoThumbnailsViewport">
+                <div class="produto-thumbnails-track" id="produtoThumbnailsTrack">
+                  <!-- Miniaturas injetadas dinamicamente via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Selo de Excelência Artesanal -->
+            <div class="artisan-guarantee-note">
+              <div class="artisan-guarantee-icon">
+                <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
+              </div>
+              <div class="artisan-guarantee-content">
+                <strong>Peça 100% Artesanal</strong>
+                <span>Confeccionada manualmente com acabamento de alta precisão, materiais nobres e afeto em nosso ateliê.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Informações Completas, Personalizações e Ações de Compra -->
+        <div class="produto-info-col">
+          <div class="produto-info-card">
+
+            <!-- Meta / Categoria -->
+            <div class="produto-meta-tag" id="produtoMetaTag">
+              <span>Carregando...</span>
+            </div>
+
+            <!-- Nome do Produto -->
+            <h1 class="produto-title" id="produtoTitle">Nome do Produto</h1>
+
+            <!-- Bloco de Preço e Condições Modernizado -->
+            <div class="produto-pricing-block" aria-label="Informações de Preço e Condições de Pagamento">
+              <div class="price-header-row">
+                <span class="price-label-badge" id="priceLabelBadge">
+                  <i class="fa-solid fa-tag" id="priceLabelIcon" aria-hidden="true"></i>
+                  <span class="product-currency" id="productCurrencyLabel">Valor:</span>
+                </span>
+                <span class="price-status-chip">
+                  <span class="status-indicator-dot" aria-hidden="true"></span>
+                  <span>Disponível sob encomenda</span>
+                </span>
+              </div>
+
+              <div class="price-main-row">
+                <span class="product-amount" id="produtoPriceAmount">R$ 0,00</span>
+              </div>
+
+              <div class="price-payment-details">
+                <div class="payment-option-item">
+                  <i class="fa-solid fa-credit-card" aria-hidden="true"></i>
+                  <span><strong>Cartão de crédito</strong></span>
+                </div>
+                <div class="payment-option-item payment-option-pix">
+                  <i class="fa-brands fa-pix" aria-hidden="true"></i>
+                  <span><strong>Pix:</strong> <span class="payment-highlight">5% OFF</span> à vista</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Descrição Completa -->
+            <div class="produto-description-block">
+              <h2 class="description-heading">Sobre a Peça</h2>
+              <p class="produto-description-text" id="produtoDescriptionText">
+                Carregando descrição detalhada do produto...
+              </p>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAINEL DE PERSONALIZAÇÃO (EXCLUSIVO PARA AGENDAS)       -->
+            <!-- Fluxo unificado e guiado para customização              -->
+            <!-- ======================================================= -->
+            <div class="agenda-customization-card" id="agendaCustomizationCard" style="display: none;" aria-label="Personalização de Características da Agenda">
+              <div class="agenda-customization-header">
+                <div class="customization-header-icon">
+                  <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                </div>
+                <div class="customization-header-text">
+                  <h3 class="customization-title">Personalização da sua Agenda</h3>
+                  <p class="customization-subtitle">Escolha sua capa do mostruário, tipo de fechamento e miolo interno:</p>
+                </div>
+              </div>
+
+              <!-- Escolha da Capa (Destaque Principal) -->
+              <div class="personalization-capas-callout">
+                <i class="fa-solid fa-palette"></i>
+                <span>Confira as <strong>34 opções de capas para Agendas</strong> e <button type="button" class="link-capas-inline-btn" id="btnCalloutOpenPicker">escolha seu modelo favorito</button> na encomenda!</span>
+              </div>
+
+              <!-- Grupo 1: Fechamento -->
+              <div class="agenda-feature-group" data-group="fechamento">
+                <div class="feature-group-label-row">
+                  <span class="feature-group-name">
+                    <i class="fa-solid fa-ribbon" aria-hidden="true"></i>
+                    <strong>Tipo de Fechamento:</strong>
+                  </span>
+                  <span class="feature-group-status" id="statusFechamento">Nenhum selecionado</span>
+                </div>
+                <div class="feature-options-grid">
+                  <button type="button" class="btn-feature-option" data-group="fechamento" data-value="Sem fechamento" aria-pressed="false" id="btnOptSemFechamento">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Sem fechamento</span>
+                  </button>
+                  <button type="button" class="btn-feature-option" data-group="fechamento" data-value="Fechamento com elástico" aria-pressed="false" id="btnOptFechamentoElastico">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Fechamento com elástico</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Grupo 2: Horário / Miolo -->
+              <div class="agenda-feature-group" data-group="horario">
+                <div class="feature-group-label-row">
+                  <span class="feature-group-name">
+                    <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                    <strong>Disposição do Miolo:</strong>
+                  </span>
+                  <span class="feature-group-status" id="statusHorario">Nenhum selecionado</span>
+                </div>
+                <div class="feature-options-grid">
+                  <button type="button" class="btn-feature-option" data-group="horario" data-value="Com horário" aria-pressed="false" id="btnOptComHorario">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Com horário</span>
+                  </button>
+                  <button type="button" class="btn-feature-option" data-group="horario" data-value="Sem horário" aria-pressed="false" id="btnOptSemHorario">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Sem horário</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resumo Dinâmico dos Itens Selecionados no Fluxo da Compra -->
+            <section class="produto-selected-items-card" id="produtoSelectedItemsSection" aria-labelledby="selectedItemsTitle">
+              <div class="selected-items-header">
+                <div class="selected-items-title-group">
+                  <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                  <h3 class="selected-items-title" id="selectedItemsTitle">Sua Personalização</h3>
+                </div>
+                <span class="selected-items-count-badge" id="selectedItemsCountBadge">0 item</span>
+              </div>
+
+              <div class="selected-items-body" id="selectedItemsBody">
+                <!-- Conteúdo renderizado dinamicamente via JS -->
+              </div>
+            </section>
+
+            <!-- Botão Primário: Adicionar ao Carrinho (Destaque Soberano) -->
+            <button type="button" class="btn-add-to-cart-hero" id="btnAddToCartHero">
+              <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+              <span>Adicionar ao Carrinho</span>
+            </button>
+
+            <!-- Painel de Ações Rápidas & WhatsApp -->
+            <div class="produto-actions-panel">
+              <a href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-hero" id="btnWhatsappHero">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Encomendar este Produto pelo WhatsApp</span>
+              </a>
+
+              <div class="produto-secondary-actions">
+                <a href="index.html#contato" class="btn-contact-custom">
+                  <i class="fa-regular fa-envelope"></i>
+                  <span>Pedir Orçamento</span>
+                </a>
+                <button type="button" class="btn-share-product" id="btnShareProduct" aria-label="Copiar link do produto">
+                  <i class="fa-regular fa-copy"></i>
+                  <span>Compartilhar</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Selos de Confiança Lalateliê -->
+            <div class="produto-trust-grid">
+              <div class="trust-card-mini">
+                <div class="trust-card-icon"><i class="fa-solid fa-heart"></i></div>
+                <div class="trust-card-text">
+                  <strong>Feito com Amor</strong>
+                  <span>Produção cuidadosa e 100% manual</span>
+                </div>
+              </div>
+              <div class="trust-card-mini">
+                <div class="trust-card-icon"><i class="fa-solid fa-gift"></i></div>
+                <div class="trust-card-text">
+                  <strong>Embalagem Especial</strong>
+                  <span>Chega perfumada e protegida</span>
+                </div>
+              </div>
+              <div class="trust-card-mini">
+                <div class="trust-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <div class="trust-card-text">
+                  <strong>Envio Seguro</strong>
+                  <span>Para todo o território brasileiro</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- SEÇÃO COMPLEMENTAR: ESPECIFICAÇÕES TÉCNICAS & ATELIÊ      -->
+      <!-- Layout nobre em 2 colunas logo abaixo do produto          -->
+      <!-- ========================================================= -->
+      <section class="produto-specs-section" aria-label="Especificações Técnicas e Acabamentos da Peça">
+        <div class="specs-section-grid">
+          <!-- Bloco 1: Ficha Técnica & Acabamentos Nobres -->
+          <div class="produto-specs-container">
+            <h3 class="specs-block-title">
+              <i class="fa-solid fa-certificate"></i>
+              Especificações Técnicas & Acabamentos
+            </h3>
+            <p class="specs-block-subtitle">Estrutura durável, encadernação nobre e papel de alta gramatura:</p>
+            <div class="specs-items-list" id="produtoSpecsList">
+              <!-- Itens injetados via JS -->
+            </div>
+          </div>
+
+          <!-- Bloco 2: Personalização Exclusiva do Lalateliê -->
+          <div class="personalization-info-box">
+            <div class="personalization-header">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <h3>Personalização Exclusiva Lalateliê</h3>
+            </div>
+            <p class="personalization-text">
+              Cada peça do Lalateliê é confeccionada para contar uma história. Oferecemos personalização completa para que o seu produto seja único, com acabamento impecável para o seu dia a dia ou para presentear alguém especial.
+            </p>
+            <div class="personalization-highlights-grid">
+              <div class="personalization-highlight-item">
+                <div class="highlight-item-icon"><i class="fa-solid fa-signature"></i></div>
+                <div>
+                  <strong>Gravação de Nome na Capa</strong>
+                  <span>Acabamento nobre, resistente e com tipografia refinada.</span>
+                </div>
+              </div>
+              <div class="personalization-highlight-item">
+                <div class="highlight-item-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <div>
+                  <strong>Mensagem Afetiva na Folha de Rosto</strong>
+                  <span>Dedicatória impressa em papel especial para tornar o presente inesquecível.</span>
+                </div>
+              </div>
+              <div class="personalization-highlight-item">
+                <div class="highlight-item-icon"><i class="fa-solid fa-shield-heart"></i></div>
+                <div>
+                  <strong>Laminação Protetora Durável</strong>
+                  <span>Proteção contra respingos e desgaste, fácil de higienizar com pano seco.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Estado: Produto Não Encontrado -->
+      <div class="produto-not-found-state" id="produtoNotFound">
+        <div class="not-found-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h2>Produto não encontrado</h2>
+        <p>Não encontramos nenhum produto correspondente ao código informado. Acesse nosso catálogo para conferir todas as criações disponíveis.</p>
+        <a href="catalogo.html" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-book-open"></i> Ver Catálogo Completo
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 4. SEÇÃO DE PRODUTOS RELACIONADOS                         -->
+  <!-- ========================================================= -->
+  <section class="related-products-section" id="relatedSection">
+    <div class="related-products-container">
+      <div class="related-header">
+        <span class="related-header-tag">Coleção Artesanal</span>
+        <h2>Você Também Pode Amar</h2>
+        <p>Outras criações afetivas do nosso ateliê selecionadas especialmente para você</p>
+      </div>
+
+      <div class="related-grid" id="relatedGrid">
+        <!-- Cards injetados via produto.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 5. SEÇÃO DE AJUDA / ENCOMENDAS SOB MEDIDA                 -->
+  <!-- ========================================================= -->
+  <section class="catalogo-help-cta">
+    <div class="catalogo-help-inner">
+      <span class="catalogo-help-badge"><i class="fa-solid fa-sparkles"></i> ATENDIMENTO EXCLUSIVO</span>
+      <h2>Deseja um projeto totalmente personalizado?</h2>
+      <p>Desenvolvemos projetos sob medida para datas comemorativas, presentes inesquecíveis e kits corporativos. Converse diretamente com a artesã no WhatsApp!</p>
+      <a href="https://wa.me/5533999774017?text=Ol%C3%A1%2C%20Lalateli%C3%AA!%20Gostaria%20de%20solicitar%20um%20projeto%20de%20papelaria%20personalizado." target="_blank" rel="noopener noreferrer" class="btn btn-help-whatsapp btn-primary btn-lg">
+        <i class="fa-brands fa-whatsapp"></i> Falar com a Artesã no WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 6. TOAST DE CONFIRMAÇÃO DE LINK COPIADO                   -->
+  <!-- ========================================================= -->
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Link copiado para a área de transferência!</span>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- BOTÕES FLUTUANTES (SCROLLTOP, INSTAGRAM, WHATSAPP)        -->
+  <!-- Ordem visual vertical (de baixo para cima):               -->
+  <!--   1. WhatsApp (inferior)                                  -->
+  <!--   2. Instagram (meio)                                     -->
+  <!--   3. ScrollTop (superior)                                 -->
+  <!-- ========================================================= -->
+  <!-- 3. Botão Scroll to Top (Superior) -->
+  <button type="button" class="btn-scroll-top" id="btnScrollTop" aria-label="Voltar ao topo da página" title="Voltar ao topo">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- 2. Botão Flutuante do Instagram (Meio) -->
+  <div class="floating-instagram" id="floatingInstagram">
+    <a href="https://www.instagram.com/lalatelie_personalizados" target="_blank" rel="noopener noreferrer" class="instagram-btn" aria-label="Visite nosso Instagram @lalatelie_personalizados" title="Instagram @lalatelie_personalizados">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+      <span class="instagram-pulse"></span>
+    </a>
+  </div>
+
+  <!-- 1. Botão Flutuante do WhatsApp (Inferior) -->
+  <div class="floating-whatsapp" id="floatingWhatsapp">
+    <a href="https://wa.me/5533999774017?text=Ol%C3%A1%2C%20Lalateli%C3%AA!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20produtos." target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Falar conosco no WhatsApp" title="Falar no WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 7. RODAPÉ INSTITUCIONAL                                   -->
+  <!-- ========================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!-- Coluna 1: Marca & Manifesto -->
+      <div class="footer-col footer-brand-col">
+        <a href="index.html#hero" class="brand-logo footer-logo" aria-label="Lalateliê Página Inicial">
+          <img src="assets/images/logo/logo.png" alt="Lalateliê - Personalizando Momentos" class="brand-logo-img footer-logo-img">
+        </a>
+        <p class="footer-about">
+          Papelaria afetiva e encadernação artesanal feita à mão com amor, rigor e delicadeza. Cada peça carrega uma história única pensada para transformar a sua rotina.
+        </p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/lalatelie_personalizados" target="_blank" rel="noopener noreferrer" aria-label="Instagram @lalatelie_personalizados"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/jayce.larissa" target="_blank" rel="noopener noreferrer" aria-label="Facebook Larissa Lalateliê"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- Coluna 2: Navegação Rápida -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Navegação</h3>
+        <ul class="footer-links">
+          <li><a href="index.html#hero">Início</a></li>
+          <li><a href="catalogo.html">Catálogo de Produtos</a></li>
+          <li><a href="index.html#capas">Capas para Agendas</a></li>
+          <li><a href="index.html#diferenciais">Nossos Diferenciais</a></li>
+          <li><a href="index.html#corporativo">Pedidos Corporativos</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Atendimento & Horários -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Atendimento</h3>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="fa-regular fa-clock"></i>
+            <span>Segunda a Sexta: 09h às 18h</span>
+          </li>
+          <li>
+            <i class="fa-regular fa-envelope"></i>
+            <a href="mailto:personalizadoslalatelie@gmail.com">personalizadoslalatelie@gmail.com</a>
+          </li>
+          <li>
+            <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/5533999774017" target="_blank" rel="noopener noreferrer">(33) 99977-4017</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Ateliê em Ipatinga, MG • Enviamos para todo o Brasil</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Coluna 4: Selos de Confiança -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Garantia Lalateliê</h3>
+        <div class="footer-badges">
+          <div class="trust-badge">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <div>
+              <strong>100% Artesanal</strong>
+              <span>Produção manual e afetuosa</span>
+            </div>
+          </div>
+          <div class="trust-badge">
+            <i class="fa-solid fa-shield-heart"></i>
+            <div>
+              <strong>Pagamento Seguro</strong>
+              <span>Pix com 5% OFF ou no cartão</span>
+            </div>
+          </div>
+          <div class="trust-badge">
+            <i class="fa-solid fa-box-open"></i>
+            <div>
+              <strong>Envio para todo Brasil</strong>
+              <span>Embalagem protegida e perfumada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Linha Inferior com Copyright -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <p class="copyright">
+          © 2026 Lalateliê Papelaria Afetiva & Artesanal. Todos os direitos reservados.
+        </p>
+        <p class="handmade-tag">
+          Feito com afeto e carinho manual <i class="fa-solid fa-heart"></i>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- ========================================================= -->
+  <!-- MODAL SELETOR DE CAPAS PARA PERSONALIZAÇÃO DA AGENDA       -->
+  <!-- ========================================================= -->
+  <div class="capa-picker-modal-overlay" id="capaPickerModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capaPickerTitle">
+    <div class="capa-picker-modal-card">
+      <div class="capa-picker-modal-header">
+        <div class="capa-picker-header-info">
+          <i class="fa-solid fa-palette"></i>
+          <div>
+            <h3 class="capa-picker-modal-title" id="capaPickerTitle">Escolher Capa para sua Agenda</h3>
+            <p class="capa-picker-modal-subtitle">Clique em uma capa abaixo para selecioná-la imediatamente para sua encomenda.</p>
+          </div>
+        </div>
+        <button type="button" class="capa-picker-modal-close" id="capaPickerClose" aria-label="Fechar seletor de capas">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="capa-picker-modal-grid" id="capaPickerGrid">
+        <!-- As 34 capas injetadas dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão Scroll Top -->
+  <script src="assets/js/scroll-top.js" defer></script>
+</body>
+</html>
