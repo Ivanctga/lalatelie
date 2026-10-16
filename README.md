@@ -14,6 +14,10 @@ O **Lalateliê** é um site institucional e catálogo digital interativo desenvo
 
 ---
 
+![imagens ai galelia](https://raw.githubusercontent.com/Ivanctga/lalatelie/refs/heads/main/lalatelie.png)
+
+---
+
 ## ✨ Funcionalidades Principais
 
 - 📱 **Design 100% Responsivo e Mobile-First**: Adaptação perfeita para smartphones, tablets e desktops.
