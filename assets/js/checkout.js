@@ -697,6 +697,19 @@
         document.getElementById('stepSuccess')?.classList.add('active');
       }
 
+      // Atualiza o texto descritivo da etapa visível no mobile
+      const mobileStatusEl = document.getElementById('mobileStepStatus');
+      if (mobileStatusEl) {
+        const stepLabels = {
+          1: 'Etapa 1 de 3: Revisão do Pedido',
+          2: 'Etapa 2 de 3: Seus Dados & Entrega',
+          3: 'Etapa 3 de 3: Pagamento & Revisão',
+          4: 'Pedido Finalizado com Sucesso'
+        };
+        const label = stepLabels[stepNum] || 'Finalização do Pedido';
+        mobileStatusEl.innerHTML = `<i class="fa-solid fa-circle-dot"></i> <span>${label}</span>`;
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
 
@@ -759,33 +772,35 @@
       if (!reviewGrid) return;
 
       const c = CheckoutState.customer;
-      const addr = `${c.rua || '—'}, ${c.numero || ''} ${c.complemento ? '• ' + c.complemento : ''} — ${c.bairro || ''}, ${c.cidade || ''}/${c.uf || ''} (CEP ${c.cep || ''})`;
+      const addrMain = `${c.rua || '—'}, Nº ${c.numero || 'S/N'}${c.complemento ? ' (' + c.complemento + ')' : ''}`;
+      const addrCity = `${c.bairro || ''} — ${c.cidade || ''}/${c.uf || ''} (CEP ${c.cep || ''})`;
       
       let payName = 'A Combinar com a Vendedora (WhatsApp)';
       if (CheckoutState.paymentMethod === 'pix') {
-        payName = 'PIX à Vista (5% de Desconto)';
+        payName = 'PIX Instantâneo à Vista (5% de Desconto)';
       } else if (CheckoutState.paymentMethod === 'credit_card') {
-        payName = 'Cartão de Crédito (Combinar via WhatsApp)';
+        payName = 'Cartão de Crédito (Combinar link no WhatsApp)';
       }
 
       reviewGrid.innerHTML = `
         <div class="review-data-block">
           <strong><i class="fa-solid fa-user"></i> Destinatário</strong>
-          <span>${c.nome || 'Nome não informado'}</span>
-          <span>${c.email || ''} • ${c.telefone || ''}</span>
+          <span class="review-data-primary">${c.nome || 'Nome não informado'}</span>
+          <span class="review-data-secondary">${c.email || ''}${c.telefone ? ' • ' + c.telefone : ''}</span>
         </div>
         <div class="review-data-block">
           <strong><i class="fa-solid fa-truck"></i> Endereço de Entrega</strong>
-          <span>${addr}</span>
-          <span>Frete: ${CheckoutState.shippingOption.name}</span>
+          <span class="review-data-primary">${addrMain}</span>
+          <span class="review-data-secondary">${addrCity}</span>
+          <span class="review-shipping-badge"><i class="fa-solid fa-clock"></i> Frete: ${CheckoutState.shippingOption.name}</span>
         </div>
         <div class="review-data-block">
           <strong><i class="fa-solid fa-wallet"></i> Forma de Pagamento</strong>
-          <span>${payName}</span>
+          <span class="review-data-primary">${payName}</span>
         </div>
         <div class="review-data-block">
           <strong><i class="fa-solid fa-boxes-packing"></i> Quantidade de Itens</strong>
-          <span>${CartManager.getTotalCount()} produtos artesanais</span>
+          <span class="review-data-primary">${CartManager.getTotalCount()} ${CartManager.getTotalCount() === 1 ? 'produto artesanal' : 'produtos artesanais'}</span>
         </div>
       `;
     },
@@ -814,7 +829,7 @@
     renderTotals() {
       const pricing = PricingEngine.calculate();
 
-      // Sidebar Totais
+      // Sidebar Totais (Desktop e Mobile)
       const subtotalEl = document.getElementById('sidebarSubtotal');
       const shippingEl = document.getElementById('sidebarShipping');
       const discountRow = document.getElementById('sidebarDiscountRow');
@@ -837,11 +852,27 @@
 
       if (totalEl) totalEl.textContent = formatMoney(pricing.total);
 
-      // Mobile Bar Totais
+      // Mobile Bar e Dropdown Totais
       const mobileTotalEl = document.getElementById('mobileSummaryTotal');
       const mobileCountEl = document.getElementById('mobileSummaryCount');
+      const mobileSubtotalEl = document.getElementById('mobileSubtotal');
+      const mobileDiscountRow = document.getElementById('mobileDiscountRow');
+      const mobileDiscountEl = document.getElementById('mobileDiscount');
+      const mobileDropdownTotal = document.getElementById('mobileDropdownTotal');
+
       if (mobileTotalEl) mobileTotalEl.textContent = formatMoney(pricing.total);
       if (mobileCountEl) mobileCountEl.textContent = `${CartManager.getTotalCount()} ${CartManager.getTotalCount() === 1 ? 'item' : 'itens'}`;
+      if (mobileSubtotalEl) mobileSubtotalEl.textContent = formatMoney(pricing.subtotal);
+      if (mobileDropdownTotal) mobileDropdownTotal.textContent = formatMoney(pricing.total);
+
+      if (mobileDiscountRow && mobileDiscountEl) {
+        if (pricing.discountPix > 0) {
+          mobileDiscountRow.style.display = 'flex';
+          mobileDiscountEl.textContent = `- ${formatMoney(pricing.discountPix)}`;
+        } else {
+          mobileDiscountRow.style.display = 'none';
+        }
+      }
 
       // Pix Destaque na Etapa 3
       const pixValEl = document.getElementById('pixHighlightVal');
@@ -898,20 +929,24 @@
               </div>
             </div>
             <div class="checkout-item-prices-col">
-              <div class="checkout-item-subtotal">${formatMoney(item.subtotal)}</div>
-              <div class="checkout-item-unit-price">${item.quantity}x ${formatMoney(item.unitPrice)} un.</div>
-              <div class="checkout-qty-controls">
-                <button type="button" class="checkout-qty-btn btn-ck-minus" data-key="${item.key}" aria-label="Diminuir quantidade">
-                  <i class="fa-solid fa-minus"></i>
-                </button>
-                <span class="checkout-qty-val">${item.quantity}</span>
-                <button type="button" class="checkout-qty-btn btn-ck-plus" data-key="${item.key}" aria-label="Aumentar quantidade">
-                  <i class="fa-solid fa-plus"></i>
+              <div class="checkout-item-actions-group">
+                <div class="checkout-qty-controls">
+                  <button type="button" class="checkout-qty-btn btn-ck-minus" data-key="${item.key}" aria-label="Diminuir quantidade">
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <span class="checkout-qty-val">${item.quantity}</span>
+                  <button type="button" class="checkout-qty-btn btn-ck-plus" data-key="${item.key}" aria-label="Aumentar quantidade">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+                <button type="button" class="checkout-item-remove-btn btn-ck-remove" data-key="${item.key}" title="Remover produto do pedido" aria-label="Remover produto do pedido">
+                  <i class="fa-regular fa-trash-can"></i>
                 </button>
               </div>
-              <button type="button" class="checkout-item-remove-btn btn-ck-remove" data-key="${item.key}" title="Remover produto do pedido">
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
+              <div class="checkout-item-price-info">
+                <div class="checkout-item-subtotal">${formatMoney(item.subtotal)}</div>
+                <div class="checkout-item-unit-price">${item.quantity}x ${formatMoney(item.unitPrice)} un.</div>
+              </div>
             </div>
           </div>
         `;
@@ -1271,12 +1306,18 @@
         btnPrint.onclick = () => window.print();
       }
 
-      // Oculta sidebar na tela de sucesso
+      // Oculta sidebar e stepper na tela de sucesso
       const sidebar = document.querySelector('.checkout-order-sidebar');
       if (sidebar) sidebar.style.display = 'none';
 
       const stepperWrapper = document.querySelector('.checkout-stepper-wrapper');
       if (stepperWrapper) stepperWrapper.style.display = 'none';
+
+      const mobileSummary = document.getElementById('mobileSummaryBar');
+      if (mobileSummary) mobileSummary.style.display = 'none';
+
+      const mobileDropdown = document.getElementById('mobileSummaryDropdown');
+      if (mobileDropdown) mobileDropdown.style.display = 'none';
     }
   };
 

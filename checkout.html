@@ -21,7 +21,7 @@
   <!-- Estilos Gerais, Carrinho e Checkout Exclusivo -->
   <link rel="stylesheet" href="assets/css/style.css?v=19">
   <link rel="stylesheet" href="assets/css/carrinho.css?v=4">
-  <link rel="stylesheet" href="assets/css/checkout.css?v=3">
+  <link rel="stylesheet" href="assets/css/checkout.css?v=4">
 </head>
 <body class="checkout-page-body">
 
@@ -42,9 +42,9 @@
       </div>
 
       <!-- Link para Retornar ao Catálogo -->
-      <a href="catalogo.html" class="checkout-return-link">
+      <a href="catalogo.html" class="checkout-return-link" aria-label="Continuar comprando no catálogo">
         <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-        <span>Continuar Comprando</span>
+        <span class="checkout-return-text">Continuar Comprando</span>
       </a>
     </div>
   </header>
@@ -64,6 +64,24 @@
   </aside>
   <div class="mobile-summary-dropdown" id="mobileSummaryDropdown">
     <div id="mobileSummaryItems"></div>
+    <div class="mobile-summary-totals-block" id="mobileSummaryTotalsBlock">
+      <div class="mobile-totals-row">
+        <span>Subtotal dos produtos</span>
+        <strong id="mobileSubtotal">R$ 0,00</strong>
+      </div>
+      <div class="mobile-totals-row">
+        <span>Frete</span>
+        <strong class="sidebar-shipping-badge">A combinar no WhatsApp</strong>
+      </div>
+      <div class="mobile-totals-row mobile-discount-row" id="mobileDiscountRow" style="display: none;">
+        <span>Desconto PIX (5% OFF)</span>
+        <strong id="mobileDiscount">- R$ 0,00</strong>
+      </div>
+      <div class="mobile-totals-row mobile-total-highlight">
+        <span>Total a pagar</span>
+        <strong id="mobileDropdownTotal">R$ 0,00</strong>
+      </div>
+    </div>
   </div>
 
   <!-- ========================================================= -->
@@ -107,6 +125,11 @@
             </div>
           </button>
 
+        </div>
+        <!-- Status textual da etapa visível no mobile -->
+        <div class="mobile-step-status" id="mobileStepStatus" aria-live="polite">
+          <i class="fa-solid fa-circle-dot"></i>
+          <span>Etapa 1 de 3: Revisão do Pedido</span>
         </div>
       </nav>
 
@@ -240,8 +263,9 @@
                   </div>
                   <span class="form-error-msg"><i class="fa-solid fa-circle-exclamation"></i> Informe um CEP com 8 dígitos.</span>
                 </div>
-                <div style="font-size: 0.82rem; color: var(--color-text-muted); padding-bottom: 8px;">
-                  <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--color-gold);"></i> Preenchimento automático de rua, bairro e cidade pelo CEP.
+                <div class="form-cep-hint">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span>Preenchimento automático de rua, bairro e cidade pelo CEP.</span>
                 </div>
               </div>
 

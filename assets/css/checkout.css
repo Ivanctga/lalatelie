@@ -229,6 +229,11 @@
   background-color: #27ae60;
 }
 
+/* Indicador de Etapa Exclusivo para Mobile (oculto no desktop) */
+.mobile-step-status {
+  display: none;
+}
+
 /* --------------------------------------------------------------------------
    4. LAYOUT PRINCIPAL EM DUAS COLUNAS (DESKTOP)
    -------------------------------------------------------------------------- */
@@ -419,6 +424,18 @@
   align-items: flex-end;
   gap: 8px;
   flex-shrink: 0;
+}
+
+.checkout-item-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkout-item-price-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .checkout-item-subtotal {
@@ -826,6 +843,20 @@
   display: flex;
 }
 
+.form-cep-hint {
+  font-size: 0.82rem;
+  color: var(--color-text-muted, #747f6a);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.4;
+  padding-top: 4px;
+}
+
+.form-cep-hint i {
+  color: var(--color-gold, #c3a56e);
+}
+
 /* --------------------------------------------------------------------------
    8. ETAPA 3 — FORMAS DE PAGAMENTO & REVISÃO FINAL
    -------------------------------------------------------------------------- */
@@ -1065,8 +1096,16 @@
   font-size: 0.9rem;
 }
 
+.review-data-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
 .review-data-block strong {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--color-olive-dark);
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -1074,8 +1113,34 @@
   margin-bottom: 2px;
 }
 
-.review-data-block span {
-  color: var(--color-text-body);
+.review-data-block strong i {
+  color: var(--color-gold);
+}
+
+.review-data-primary {
+  font-weight: 700;
+  color: var(--color-text-dark, #24291f);
+  font-size: 0.92rem;
+}
+
+.review-data-secondary {
+  color: var(--color-text-body, #4d5644);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.review-shipping-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-olive-primary, #47533b);
+  background-color: rgba(71, 83, 59, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 3px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1533,6 +1598,7 @@
   z-index: 90;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-summary-toggle {
@@ -1561,7 +1627,7 @@
 }
 
 .mobile-summary-icon-arrow {
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast, 0.2s ease);
 }
 
 .mobile-summary-bar.is-open .mobile-summary-icon-arrow {
@@ -1570,13 +1636,46 @@
 
 .mobile-summary-dropdown {
   display: none;
-  background-color: var(--color-cream);
+  background-color: var(--color-cream, #faf9f5);
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(71, 83, 59, 0.1);
+  border-bottom: 1px solid rgba(71, 83, 59, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  animation: stepFadeIn 0.25s ease;
 }
 
 .mobile-summary-bar.is-open + .mobile-summary-dropdown {
   display: block;
+}
+
+.mobile-summary-totals-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px dashed rgba(71, 83, 59, 0.15);
+}
+
+.mobile-totals-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--color-text-body, #4d5644);
+}
+
+.mobile-totals-row.mobile-discount-row {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.mobile-totals-row.mobile-total-highlight {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-olive-dark, #3e4832);
+  padding-top: 8px;
+  border-top: 1px solid rgba(71, 83, 59, 0.12);
+  margin-top: 2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1617,8 +1716,11 @@
 }
 
 /* --------------------------------------------------------------------------
-   14. RESPONSIVIDADE (TABLETS E CELULARES)
+   14. RESPONSIVIDADE E OTIMIZAÇÃO MOBILE PROFISSIONAL
+   Suporte refinado para: 320px, 360px, 375px, 390px, 414px e 768px
    -------------------------------------------------------------------------- */
+
+/* TABLETS E TELAS MÉDIAS (<= 991px) */
 @media (max-width: 991px) {
   .checkout-grid-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -1641,17 +1743,71 @@
   }
 }
 
+/* SMARTPHONES E TELAS PEQUENAS (<= 767px) */
 @media (max-width: 767px) {
+  /* Estrutura Geral */
+  .checkout-main-content {
+    padding: 16px 0 40px 0;
+  }
+
   .checkout-container {
-    padding: 0 16px;
+    padding: 0 14px;
+  }
+
+  /* Cabeçalho Compacto e Confortável */
+  .checkout-header {
+    padding: 10px 0;
   }
 
   .checkout-header-container {
-    padding: 0 16px;
+    padding: 0 14px;
+    gap: 12px;
+  }
+
+  .checkout-brand-img {
+    height: 38px;
+    max-width: 140px;
   }
 
   .checkout-security-badge span {
     display: none;
+  }
+
+  .checkout-security-badge {
+    padding: 6px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .checkout-return-link {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    min-height: 44px;
+    border-radius: var(--radius-pill, 9999px);
+    background-color: var(--color-sage-card, #f2f5ef);
+    border: 1px solid rgba(71, 83, 59, 0.1);
+  }
+
+  /* Barra de Resumo Sticky com offset correto */
+  .mobile-summary-bar {
+    top: 58px;
+    padding: 12px 14px;
+  }
+
+  .mobile-summary-left {
+    font-size: 0.88rem;
+  }
+
+  .mobile-summary-right {
+    font-size: 0.98rem;
+  }
+
+  .mobile-summary-dropdown {
+    padding: 14px;
+  }
+
+  /* Stepper / Indicador de Etapas */
+  .checkout-stepper-wrapper {
+    margin-bottom: 22px;
   }
 
   .checkout-stepper {
@@ -1665,49 +1821,237 @@
 
   .stepper-step {
     padding: 4px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .stepper-number {
-    width: 32px;
-    height: 32px;
-    font-size: 0.85rem;
+    width: 34px;
+    height: 34px;
+    font-size: 0.88rem;
   }
 
+  .stepper-line {
+    margin: 0 6px;
+    height: 2px;
+  }
+
+  /* Status textual da etapa visível no mobile */
+  .mobile-step-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-olive-dark, #3e4832);
+    background-color: rgba(71, 83, 59, 0.07);
+    border: 1px solid rgba(71, 83, 59, 0.1);
+    padding: 7px 16px;
+    border-radius: var(--radius-pill, 9999px);
+    margin: 12px auto 0 auto;
+    width: fit-content;
+    text-align: center;
+  }
+
+  .mobile-step-status i {
+    color: var(--color-gold, #c3a56e);
+    font-size: 0.65rem;
+  }
+
+  /* Painel Principal de Etapas */
   .checkout-steps-container {
-    padding: 20px 16px;
-    border-radius: var(--radius-sm);
+    padding: 18px 14px;
+    border-radius: 12px;
   }
 
+  .step-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .step-heading {
+    font-size: 1.38rem;
+    gap: 8px;
+    line-height: 1.25;
+  }
+
+  .step-heading i {
+    font-size: 1.15rem;
+  }
+
+  .step-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  /* Card de Produto no Checkout (Grid em 2 Níveis Perfeito no Mobile) */
+  .checkout-items-list {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .checkout-item-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px 12px;
+    padding: 12px;
+    border-radius: 12px;
+    align-items: start;
+  }
+
+  .checkout-item-thumb-wrapper {
+    grid-column: 1;
+    grid-row: 1;
+    width: 64px;
+    height: 64px;
+  }
+
+  .checkout-item-info {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .checkout-item-cat {
+    font-size: 0.68rem;
+    margin-bottom: 2px;
+  }
+
+  .checkout-item-title {
+    font-size: 0.95rem;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+
+  .checkout-item-customizations {
+    gap: 4px;
+    margin-bottom: 0;
+  }
+
+  .checkout-addon-tag {
+    font-size: 0.72rem;
+    padding: 2px 7px;
+  }
+
+  /* Barra inferior do card: Ações à esquerda, Preço à direita */
+  .checkout-item-prices-col {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(71, 83, 59, 0.12);
+  }
+
+  .checkout-item-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .checkout-qty-controls {
+    border-radius: 8px;
+  }
+
+  .checkout-qty-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.92rem;
+  }
+
+  .checkout-qty-val {
+    min-width: 30px;
+    font-size: 0.92rem;
+  }
+
+  .checkout-item-remove-btn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    padding: 0;
+    border-radius: 6px;
+  }
+
+  .checkout-item-price-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .checkout-item-subtotal {
+    font-size: 1.08rem;
+    font-weight: 800;
+  }
+
+  .checkout-item-unit-price {
+    font-size: 0.76rem;
+  }
+
+  /* Bloco de Frete e Nota de Produção */
+  .checkout-shipping-note-box {
+    padding: 14px;
+    gap: 12px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 22px;
+  }
+
+  .checkout-shipping-note-box i {
+    font-size: 1.25rem;
+    margin-top: 2px;
+  }
+
+  /* Estado de Carrinho Vazio */
   .checkout-empty-state {
-    padding: 30px 10px;
+    padding: 32px 12px;
+  }
+
+  .checkout-empty-icon {
+    width: 68px;
+    height: 68px;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .checkout-empty-title {
+    font-size: 1.45rem;
+  }
+
+  .checkout-empty-text {
+    font-size: 0.92rem;
+    line-height: 1.5;
   }
 
   .checkout-empty-state .btn {
     width: 100%;
-    max-width: 100%;
-    padding: 12px 16px;
+    min-height: 48px;
+    padding: 12px 18px;
     font-size: 0.95rem;
-    white-space: normal;
+    justify-content: center;
   }
 
-  .step-heading {
-    font-size: 1.5rem;
-  }
-
-  .checkout-item-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px;
-  }
-
-  .checkout-item-prices-col {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    border-top: 1px dashed rgba(71, 83, 59, 0.1);
+  /* Formulário de Dados e Endereço (Etapa 2) */
+  .form-section-title {
+    font-size: 1.05rem;
+    margin: 20px 0 14px 0;
+    padding-bottom: 6px;
   }
 
   .form-grid-row,
@@ -1716,28 +2060,471 @@
   .form-grid-row.col-cep-row {
     grid-template-columns: 1fr;
     gap: 12px;
+    margin-bottom: 12px;
   }
 
-  .shipping-input-group {
-    max-width: 100%;
+  /* Inputs com 16px para evitar auto-zoom no iOS Safari */
+  .form-control {
+    font-size: 16px !important;
+    min-height: 48px;
+    border-radius: 10px;
+    padding: 12px 14px;
   }
 
-  .step-navigation-actions {
-    flex-direction: column-reverse;
+  .form-label {
+    font-size: 0.86rem;
   }
 
-  .btn-step-prev,
-  .btn-step-next {
+  .form-control-icon {
+    right: 14px;
+    top: 15px;
+  }
+
+  .form-error-msg {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .form-cep-hint {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  /* Formas de Pagamento (Etapa 3) - Sem Quebras de Linha Desalinhadas */
+  .payment-methods-selector {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .payment-method-card {
+    border-radius: 12px;
+  }
+
+  .payment-method-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .payment-method-label {
     width: 100%;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .payment-method-radio {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .payment-method-icon {
+    font-size: 1.3rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .payment-method-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.35;
+  }
+
+  /* Badges e status alinhados com o texto do método */
+  .payment-method-header > span,
+  .payment-method-header > div:last-child {
+    margin-left: 34px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .payment-method-body {
+    padding: 14px 12px;
+  }
+
+  .combinar-vendedora-box,
+  .pix-details-box,
+  .card-whatsapp-box {
+    padding: 14px 12px;
+    border-radius: 10px;
+  }
+
+  .combinar-vendedora-header,
+  .card-whatsapp-header {
+    gap: 10px;
+  }
+
+  .combinar-vendedora-header strong,
+  .card-whatsapp-header strong {
+    font-size: 0.92rem;
+  }
+
+  .pix-highlight-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .pix-highlight-title {
+    font-size: 0.88rem;
+  }
+
+  .pix-highlight-value {
+    font-size: 1.25rem;
+  }
+
+  .pix-instructions-list {
+    font-size: 0.84rem;
+    gap: 8px;
+  }
+
+  /* Caixa de Revisão de Dados Pré-Finalização */
+  .checkout-review-summary-box {
+    padding: 14px 12px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+  }
+
+  .review-summary-title {
+    font-size: 0.98rem;
+    margin-bottom: 12px;
   }
 
   .review-data-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
+  .review-data-block {
+    background-color: var(--color-white, #ffffff);
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(71, 83, 59, 0.08);
+  }
+
+  /* Botões de Ação das Etapas (Mobile Full-Width com Altura de Toque >= 48px) */
+  .step-navigation-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    width: 100%;
+  }
+
+  .btn-step-next,
+  .btn-step-prev {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 20px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 0;
+  }
+
+  .btn-step-next {
+    font-size: 1rem;
+    box-shadow: 0 4px 14px rgba(71, 83, 59, 0.25);
+  }
+
+  .btn-step-prev {
+    font-size: 0.92rem;
+    background-color: transparent;
+  }
+
+  /* Tela de Sucesso e Confirmação */
+  .checkout-success-card {
+    padding: 24px 12px;
+  }
+
+  .success-icon-badge {
+    width: 68px;
+    height: 68px;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .success-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .success-order-num-badge {
+    font-size: 0.92rem;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+  }
+
+  .success-status-pill {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    margin-bottom: 18px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .success-whatsapp-redirect-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px 12px;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .success-whatsapp-banner-icon {
+    font-size: 2rem;
+  }
+
+  .success-whatsapp-banner-title {
+    font-size: 0.95rem;
+  }
+
+  .success-whatsapp-banner-desc {
+    font-size: 0.84rem;
+  }
+
+  .success-pix-payment-box {
+    padding: 18px 12px;
+    margin-bottom: 22px;
+  }
+
+  .pix-qr-img {
+    width: 170px;
+    height: 170px;
+  }
+
+  .pix-code-copy-box {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .pix-code-input {
+    width: 100%;
+    min-height: 44px;
+    text-align: center;
+    font-size: 0.78rem;
+  }
+
+  .btn-copy-pix {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 0.92rem;
+    border-radius: 8px;
+  }
+
+  .success-actions-row {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .btn-success-whatsapp,
+  .btn-success-print,
+  .btn-success-home {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 18px;
+  }
+
+  .btn-success-whatsapp {
+    min-height: 50px;
+    font-size: 0.98rem;
+  }
+
+  .btn-success-print,
+  .btn-success-home {
+    font-size: 0.92rem;
+  }
+
+  /* Sidebar Inferior no Mobile */
+  .sidebar-card {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .sidebar-heading {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  .sidebar-trust-box {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Rodapé do Checkout */
   .checkout-footer-container {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
+    padding: 0 14px;
+  }
+
+  .checkout-footer-badges {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    font-size: 0.78rem;
+  }
+}
+
+/* SMARTPHONES COMPACTOS (<= 480px) */
+@media (max-width: 480px) {
+  .checkout-header-container {
+    padding: 0 12px;
+  }
+
+  .checkout-brand-img {
+    height: 36px;
+    max-width: 120px;
+  }
+
+  .checkout-security-badge {
+    display: none; /* Deixa a barra superior limpa */
+  }
+
+  .checkout-return-link {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+
+  .checkout-container {
+    padding: 0 12px;
+  }
+
+  .checkout-steps-container {
+    padding: 16px 12px;
+  }
+
+  .step-heading {
+    font-size: 1.3rem;
+  }
+
+  .checkout-item-card {
+    padding: 10px;
+    gap: 8px 10px;
+  }
+}
+
+/* TELAS MUITO ESTREITAS (<= 360px - iPhone SE 1st gen / Galaxy A antigos) */
+@media (max-width: 360px) {
+  .checkout-header-container {
+    padding: 0 8px;
+    gap: 8px;
+  }
+
+  .checkout-brand-img {
+    height: 32px;
+    max-width: 105px;
+  }
+
+  /* No 320px/360px, o link de retorno vira um botão circular com a seta */
+  .checkout-return-link {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .checkout-return-link .checkout-return-text {
+    display: none;
+  }
+
+  .checkout-container {
+    padding: 0 8px;
+  }
+
+  .checkout-steps-container {
+    padding: 14px 10px;
+    border-radius: 10px;
+  }
+
+  .step-heading {
+    font-size: 1.2rem;
+  }
+
+  .stepper-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .stepper-line {
+    margin: 0 4px;
+  }
+
+  .mobile-step-status {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+  }
+
+  .checkout-item-card {
+    grid-template-columns: 56px 1fr;
+    padding: 8px;
+  }
+
+  .checkout-item-thumb-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .checkout-item-title {
+    font-size: 0.9rem;
+  }
+
+  .checkout-item-subtotal {
+    font-size: 1rem;
+  }
+
+  .checkout-qty-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .checkout-qty-val {
+    min-width: 26px;
+    font-size: 0.86rem;
+  }
+
+  .payment-method-name {
+    font-size: 0.92rem;
+  }
+
+  .payment-method-header > span,
+  .payment-method-header > div:last-child {
+    margin-left: 28px;
+    font-size: 0.76rem;
+  }
+
+  .btn-step-next {
+    font-size: 0.94rem;
+    padding: 12px 14px;
+  }
+
+  .btn-step-prev {
+    font-size: 0.88rem;
+    padding: 11px 14px;
   }
 }
