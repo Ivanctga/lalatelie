@@ -292,11 +292,13 @@
 }
 
 .cart-item-title {
+  font-family: var(--font-sans);
   font-size: 0.96rem;
   font-weight: 700;
   color: var(--color-olive-dark, #36402c);
   margin: 0;
   line-height: 1.25;
+  letter-spacing: -0.015em;
   word-break: break-word;
 }
 
@@ -906,7 +908,7 @@
   color: var(--color-olive-primary, #47533b);
 }
 
-/* Seletor Visual de Capas (32 modelos) no Modal */
+/* Seletor Visual de Capas (30 modelos) no Modal */
 .addon-capas-viewport {
   max-height: 220px;
   overflow-y: auto;
@@ -1260,6 +1262,11 @@
 }
 
 @media (max-width: 420px) {
+  .cart-item-title {
+    font-size: clamp(0.88rem, 3.6vw, 0.94rem);
+    line-height: 1.24;
+  }
+
   .cart-summary-total {
     font-size: 1.4rem;
   }
@@ -1282,36 +1289,99 @@
 }
 
 /* --------------------------------------------------------------------------
-   7. BOTÃO DE CARRINHO NOS CARDS DO CARROSSEL DA HOME
+   8. ESTILOS DO CAMPO DE NOME PERSONALIZADO NO ADDON MODAL
    -------------------------------------------------------------------------- */
-.carousel-card-actions {
-  display: inline-flex;
+.addon-custom-name-box {
+  margin-top: 10px;
+  background-color: #fafbf8;
+  border: 1.5px solid rgba(71, 83, 59, 0.16);
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: all 0.25s ease;
+  animation: fadeInDownModalName 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInDownModalName {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.addon-custom-name-label {
+  display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.btn-carousel-cart {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-pill, 9999px);
-  background-color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 700;
   color: var(--color-olive-dark, #36402c);
-  border: 1.5px solid rgba(71, 83, 59, 0.2);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.88rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
+  margin-bottom: 8px;
 }
 
-.btn-carousel-cart:hover {
-  background-color: var(--color-olive-primary, #47533b);
+.addon-custom-name-label i {
+  color: var(--color-gold, #c3a56e);
+}
+
+.addon-custom-name-label .req-star {
+  color: #c0392b;
+}
+
+.addon-custom-name-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.addon-custom-name-input {
+  width: 100%;
+  padding: 10px 58px 10px 12px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.92rem;
+  color: var(--color-olive-dark, #36402c);
+  background-color: #ffffff;
+  border: 1.5px solid rgba(71, 83, 59, 0.18);
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.addon-custom-name-input:focus {
   border-color: var(--color-olive-primary, #47533b);
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(71, 83, 59, 0.22);
+  box-shadow: 0 0 0 3px rgba(71, 83, 59, 0.12);
+}
+
+.addon-custom-name-input.has-error {
+  border-color: #e74c3c;
+  background-color: #fff9f9;
+}
+
+.addon-custom-name-counter {
+  position: absolute;
+  right: 12px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--color-text-muted, #777);
+  pointer-events: none;
+}
+
+.addon-custom-name-hint {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-muted, #777);
+  margin-top: 6px;
+}
+
+.addon-custom-name-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #c0392b;
+  margin-top: 6px;
 }
 

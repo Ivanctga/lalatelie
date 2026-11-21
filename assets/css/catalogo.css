@@ -190,18 +190,6 @@
   color: var(--color-olive-dark);
 }
 
-.active-filter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: rgba(195, 165, 110, 0.15);
-  color: #7d632b;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
 /* --------------------------------------------------------------------------
    4. SEÇÃO PRINCIPAL DE PRODUTOS & GRID RESPONSIVO
    -------------------------------------------------------------------------- */
@@ -522,11 +510,12 @@
 }
 
 .card-product-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-olive-dark);
   line-height: 1.25;
+  letter-spacing: -0.015em;
   margin-bottom: 5px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -544,21 +533,19 @@
   color: var(--color-gold);
 }
 
-/* Tipografia nobre e perfeitamente integrada para os algarismos 1 e 2 nos nomes das Agendas */
+/* Fallback defensivo: herança completa de estilos sem fragmentação de fontes */
+.agenda-model-a5,
+.agenda-number-5,
 .agenda-title-number {
-  font-family: var(--font-serif);
-  font-variant-numeric: lining-nums proportional-nums;
-  -webkit-font-feature-settings: "lnum" 1;
-  -moz-font-feature-settings: "lnum" 1;
-  font-feature-settings: "lnum" 1;
-  font-weight: 600;
-  font-size: 1.04em;
-  display: inline-block;
-  line-height: 1;
-  vertical-align: 0;
-  letter-spacing: -0.01em;
-  margin: 0 1px;
-  color: inherit;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
+  line-height: inherit !important;
+  vertical-align: baseline !important;
+  letter-spacing: inherit !important;
+  margin: 0 !important;
+  color: inherit !important;
 }
 
 .card-product-desc {
@@ -597,7 +584,7 @@
   white-space: nowrap;
 }
 
-/* Estilos de valor sob consulta via chat / WhatsApp (Tags e Etiquetas) */
+/* Estilos de valor sob consulta via chat / WhatsApp (Papelaria: Tags e Marcadores, Etiquetas) */
 .card-price-box-consult {
   flex: 1;
   min-width: 0;
@@ -705,267 +692,6 @@
   max-width: 440px;
   margin: 0 auto 20px;
   font-size: 0.95rem;
-}
-
-/* --------------------------------------------------------------------------
-   6. MODAL DE DETALHES AVANÇADO DO PRODUTO (QUICK VIEW COM GALERIA)
-   -------------------------------------------------------------------------- */
-.catalogo-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(25, 30, 22, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 2500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.catalogo-modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.catalogo-modal-card {
-  background-color: var(--color-white);
-  border-radius: var(--radius-lg);
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.catalogo-modal-overlay.active .catalogo-modal-card {
-  transform: translateY(0) scale(1);
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(71, 83, 59, 0.15);
-  color: var(--color-olive-dark);
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: var(--transition-fast);
-}
-
-.modal-close-btn:hover {
-  background-color: var(--color-olive-primary);
-  color: var(--color-white);
-}
-
-/* Coluna de Mídia no Modal */
-.modal-media-col {
-  background-color: #f7f6f1;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  position: relative;
-}
-
-.modal-main-img-box {
-  width: 100%;
-  height: 360px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(62, 72, 50, 0.08);
-  position: relative;
-}
-
-.modal-main-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.25s ease;
-}
-
-.modal-nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.85);
-  border: none;
-  color: var(--color-olive-dark);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  transition: var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.modal-nav-arrow:hover {
-  background-color: var(--color-olive-primary);
-  color: var(--color-white);
-}
-
-.modal-nav-prev {
-  left: 12px;
-}
-
-.modal-nav-next {
-  right: 12px;
-}
-
-.modal-thumbnails {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-
-.modal-thumb {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid transparent;
-  flex-shrink: 0;
-  transition: var(--transition-fast);
-  opacity: 0.7;
-}
-
-.modal-thumb.active {
-  border-color: var(--color-gold);
-  opacity: 1;
-}
-
-.modal-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Coluna de Informações no Modal */
-.modal-info-col {
-  padding: 36px 32px 36px 24px;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.modal-tag {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-gold);
-}
-
-.modal-title {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  color: var(--color-olive-dark);
-  line-height: 1.2;
-  margin-bottom: 12px;
-}
-
-.modal-price {
-  font-family: var(--font-sans);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-olive-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
-}
-
-.modal-desc {
-  font-size: 0.94rem;
-  line-height: 1.65;
-  color: var(--color-text-body);
-  margin-bottom: 24px;
-}
-
-.modal-specs-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-olive-dark);
-  margin-bottom: 10px;
-}
-
-.modal-specs-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-bottom: 28px;
-}
-
-.modal-spec-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.88rem;
-  color: #4a5442;
-}
-
-.modal-spec-item i {
-  color: var(--color-gold);
-  font-size: 0.85rem;
-}
-
-.modal-cta-box {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.btn-whatsapp-order {
-  background-color: #25d366;
-  color: var(--color-white);
-  border: none;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 14px 20px;
-  border-radius: var(--radius-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.btn-whatsapp-order:hover {
-  background-color: #1faa50;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
-  color: var(--color-white);
 }
 
 /* --------------------------------------------------------------------------
@@ -1086,24 +812,10 @@
     gap: 18px 16px;
     max-width: 860px;
   }
-}
 
-@media (max-width: 992px) {
-  .catalogo-modal-card {
-    grid-template-columns: 1fr;
-    max-height: 85vh;
-  }
-
-  .modal-media-col {
-    padding: 24px;
-  }
-
-  .modal-main-img-box {
-    height: 280px;
-  }
-
-  .modal-info-col {
-    padding: 24px;
+  .card-product-title {
+    font-size: 1.10rem;
+    line-height: 1.26;
   }
 }
 
@@ -1293,9 +1005,11 @@
   }
 
   .card-product-title {
-    font-size: 1.05rem;
-    line-height: 1.25;
+    font-size: clamp(0.96rem, 2.3vw, 1.05rem);
+    line-height: 1.28;
+    letter-spacing: -0.015em;
     margin-bottom: 4px;
+    min-height: 2.56em;
   }
 
   .card-product-desc {
@@ -1480,10 +1194,11 @@
   }
 
   .card-product-title {
-    font-size: 0.94rem;
-    line-height: 1.25;
+    font-size: clamp(0.84rem, 3.7vw, 0.92rem);
+    line-height: 1.26;
+    letter-spacing: -0.015em;
     margin-bottom: 3px;
-    min-height: 2.5em;
+    min-height: 2.52em;
   }
 
   .card-product-desc {
@@ -1551,8 +1266,8 @@
   }
 
   .catalogo-grid.view-mode-list .card-product-title {
-    font-size: 0.98rem !important;
-    line-height: 1.22 !important;
+    font-size: clamp(0.90rem, 3.8vw, 1.02rem) !important;
+    line-height: 1.24 !important;
     margin-bottom: 2px !important;
     min-height: auto !important;
   }
@@ -1634,6 +1349,19 @@
 
 /* Telas muito estreitas (até 380px): 3 colunas compactas */
 @media (max-width: 380px) {
+  .card-product-title {
+    font-size: clamp(0.78rem, 3.8vw, 0.84rem);
+    line-height: 1.24;
+    letter-spacing: -0.015em;
+    min-height: 2.48em;
+    margin-bottom: 2px;
+  }
+
+  .catalogo-grid.view-mode-list .card-product-title {
+    font-size: 0.86rem !important;
+    line-height: 1.22 !important;
+  }
+
   .catalogo-grid.grid-capas,
   .catalogo-grid:has(.catalogo-capa-card),
   .capas-grid-16 {
@@ -2137,8 +1865,8 @@
 
 .capa-models-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   width: 100%;
 }
 

@@ -289,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'agendas': 1,
         'cadernos-personalizados': 2,
         'cadernos': 2,
-        'calendarios': 3,
-        'tags': 4
+        'tags': 3,
+        'papelaria': 3
       };
 
       // Ordenação: respeita campo 'order' / 'homeOrder' ou categorização oficial + popularidade
@@ -342,9 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </h3>
                 <p class="card-product-desc">${descText}</p>
               </div>
-              <div class="card-footer-row ${(prod.consultPrice || prod.category === 'tags') ? 'card-footer-row-consult' : ''}">
-                <div class="card-price-box ${(prod.consultPrice || prod.category === 'tags') ? 'card-price-box-consult' : ''}">
-                  ${(prod.consultPrice || prod.category === 'tags')
+              <div class="card-footer-row ${(prod.consultPrice || prod.category === 'tags' || prod.category === 'papelaria') ? 'card-footer-row-consult' : ''}">
+                <div class="card-price-box ${(prod.consultPrice || prod.category === 'tags' || prod.category === 'papelaria') ? 'card-price-box-consult' : ''}">
+                  ${(prod.consultPrice || prod.category === 'tags' || prod.category === 'papelaria')
                     ? (window.formatProductPrice ? window.formatProductPrice(prod, { withLink: false }) : priceText)
                     : `<span class="price-value">${window.formatProductPrice ? window.formatProductPrice(prod, { withLink: false }) : priceText}</span>`
                   }
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (capasPool.length === 0) {
-      for (let i = 1; i <= 34; i++) {
+      for (let i = 1; i <= 30; i++) {
         capasPool.push(`assets/images/produtos/capas/capas${i}.jpg`);
       }
     }

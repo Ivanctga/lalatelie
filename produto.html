@@ -14,7 +14,7 @@
   <!-- Google Fonts: Cormorant Garamond, Alex Brush e Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -197,7 +197,7 @@
                 </div>
                 <div class="payment-option-item payment-option-pix">
                   <i class="fa-brands fa-pix" aria-hidden="true"></i>
-                  <span><strong>Pix:</strong> <span class="payment-highlight">5% OFF</span> à vista</span>
+                  <span><strong>Pix</strong> à vista</span>
                 </div>
               </div>
             </div>
@@ -228,7 +228,7 @@
               <!-- Escolha da Capa (Destaque Principal) -->
               <div class="personalization-capas-callout">
                 <i class="fa-solid fa-palette"></i>
-                <span>Confira as <strong>34 opções de capas para Agendas</strong> e <button type="button" class="link-capas-inline-btn" id="btnCalloutOpenPicker">escolha seu modelo favorito</button> na encomenda!</span>
+                <span>Confira as <strong>30 opções de capas para Agendas</strong> e <button type="button" class="link-capas-inline-btn" id="btnCalloutOpenPicker">escolha seu modelo favorito</button> na encomenda!</span>
               </div>
 
               <!-- Grupo 1: Fechamento -->
@@ -270,6 +270,43 @@
                     <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
                     <span class="btn-option-label">Sem horário</span>
                   </button>
+                </div>
+              </div>
+
+              <!-- Grupo 3: Personalização com Nome -->
+              <div class="agenda-feature-group" data-group="personalizacao_nome" id="agendaPersonalizacaoNomeGroup">
+                <div class="feature-group-label-row">
+                  <span class="feature-group-name">
+                    <i class="fa-solid fa-signature" aria-hidden="true"></i>
+                    <strong>Deseja personalizar sua agenda com nome?</strong>
+                  </span>
+                  <span class="feature-group-status" id="statusPersonalizacaoNome">Nenhum selecionado</span>
+                </div>
+                <div class="feature-options-grid">
+                  <button type="button" class="btn-feature-option" data-group="personalizacao_nome" data-value="sim" aria-pressed="false" id="btnOptPersonalizarComNome">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Sim, quero personalizar com nome.</span>
+                  </button>
+                  <button type="button" class="btn-feature-option" data-group="personalizacao_nome" data-value="nao" aria-pressed="false" id="btnOptPersonalizarSemNome">
+                    <span class="btn-option-indicator"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span class="btn-option-label">Não, quero minha agenda sem nome.</span>
+                  </button>
+                </div>
+
+                <!-- Campo para Digitar o Nome (Exibido dinamicamente quando 'Sim' selecionado) -->
+                <div class="agenda-custom-name-box" id="agendaCustomNameBox" style="display: none;">
+                  <label for="agendaInputCustomName" class="agenda-custom-name-label">
+                    <i class="fa-solid fa-pen-clip" aria-hidden="true"></i>
+                    <span>Digite o nome para personalização <strong class="req-star">*</strong></span>
+                  </label>
+                  <div class="agenda-custom-name-input-wrap">
+                    <input type="text" id="agendaInputCustomName" class="agenda-custom-name-input" placeholder="Ex.: Maria Silva" maxlength="30" autocomplete="off" spellcheck="false">
+                    <span class="agenda-custom-name-char-counter" id="agendaNameCharCounter">0/30</span>
+                  </div>
+                  <span class="agenda-custom-name-hint">Limite de 30 caracteres • Sem custo adicional</span>
+                  <span class="agenda-custom-name-error" id="agendaCustomNameError" style="display: none;" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i> Por favor, digite o nome para personalização da sua agenda.
+                  </span>
                 </div>
               </div>
             </div>
@@ -356,7 +393,7 @@
               <i class="fa-solid fa-certificate"></i>
               Especificações Técnicas & Acabamentos
             </h3>
-            <p class="specs-block-subtitle">Estrutura durável, encadernação nobre e papel de alta gramatura:</p>
+            <p class="specs-block-subtitle">Cada detalhe é produzido com carinho, criatividade e cuidado artesanal.</p>
             <div class="specs-items-list" id="produtoSpecsList">
               <!-- Itens injetados via JS -->
             </div>
@@ -375,15 +412,15 @@
               <div class="personalization-highlight-item">
                 <div class="highlight-item-icon"><i class="fa-solid fa-signature"></i></div>
                 <div>
-                  <strong>Gravação de Nome na Capa</strong>
-                  <span>Acabamento nobre, resistente e com tipografia refinada.</span>
+                  <strong>Personalização do Nome na Capa</strong>
+                  <span>Seu nome em cada detalhe, tornando sua agenda única, feita especialmente para você</span>
                 </div>
               </div>
               <div class="personalization-highlight-item">
                 <div class="highlight-item-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
                 <div>
-                  <strong>Mensagem Afetiva na Folha de Rosto</strong>
-                  <span>Dedicatória impressa em papel especial para tornar o presente inesquecível.</span>
+                  <strong>Páginas Internas Planejadas com Carinho</strong>
+                  <span>Espaço interno para controle financeiro e planejamento pessoal.</span>
                 </div>
               </div>
               <div class="personalization-highlight-item">
@@ -416,15 +453,19 @@
   <!-- ========================================================= -->
   <!-- 4. SEÇÃO DE PRODUTOS RELACIONADOS                         -->
   <!-- ========================================================= -->
-  <section class="related-products-section" id="relatedSection">
+  <section class="related-products-section" id="relatedSection" aria-labelledby="relatedSectionTitle">
     <div class="related-products-container">
       <div class="related-header">
-        <span class="related-header-tag">Coleção Artesanal</span>
-        <h2>Você Também Pode Amar</h2>
+        <span class="related-header-tag">
+          <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
+          Coleção Artesanal
+        </span>
+        <h2 id="relatedSectionTitle">Você Também Pode Amar</h2>
+        <div class="related-header-divider" aria-hidden="true"></div>
         <p>Outras criações afetivas do nosso ateliê selecionadas especialmente para você</p>
       </div>
 
-      <div class="related-grid" id="relatedGrid">
+      <div class="related-grid" id="relatedGrid" aria-live="polite">
         <!-- Cards injetados via produto.js -->
       </div>
     </div>
@@ -548,7 +589,7 @@
             <i class="fa-solid fa-shield-heart"></i>
             <div>
               <strong>Pagamento Seguro</strong>
-              <span>Pix com 5% OFF ou no cartão</span>
+              <span>Pix à vista ou no cartão</span>
             </div>
           </div>
           <div class="trust-badge">
@@ -596,7 +637,7 @@
       </div>
 
       <div class="capa-picker-modal-grid" id="capaPickerGrid">
-        <!-- As 34 capas injetadas dinamicamente via JS -->
+        <!-- As 30 capas injetadas dinamicamente via JS -->
       </div>
     </div>
   </div>

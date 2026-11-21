@@ -13,8 +13,8 @@
  * {
  *   id: 'meu-produto-novo',               // (Obrigatório) Identificador único (slug em minúsculas)
  *   title: 'Nome do Meu Produto',         // (Obrigatório) Nome comercial do produto
- *   category: 'planners',                 // (Obrigatório) 'planners' (Agendas), 'cadernos-personalizados', 'calendarios' ou 'tags'
- *   categoryLabel: 'Agendas',             // (Obrigatório) 'Agendas', 'Cadernos', 'Calendários' ou 'Tags'
+ *   category: 'planners',                 // (Obrigatório) 'planners' (Agendas), 'cadernos-personalizados' ou 'tags'
+ *   categoryLabel: 'Agendas',             // (Obrigatório) 'Agendas', 'Cadernos' ou 'Tags'
  *   tag: 'Capa Dura Wire-o',              // (Opcional) Especificação curta exibida abaixo do badge
  *   badge: 'Novidade',                    // (Opcional) Selo de destaque. Ex: 'Mais Vendido', '2 Dias por Página', 'Destaque'
  *   badgeType: 'gold',                    // (Opcional) 'gold' (dourado) ou 'sage' (verde artesanal)
@@ -41,7 +41,7 @@ window.PRODUTOS_LALATELIE = [
   // ---------------- AGENDAS ----------------
   {
     id: 'agenda-master',
-    title: 'Agenda Master 1 dia por página',
+    title: 'Agenda A5, 1 dia por página',
     category: 'planners',
     categoryLabel: 'Agendas',
     tag: 'Capa Dura Wire-o',
@@ -59,44 +59,18 @@ window.PRODUTOS_LALATELIE = [
     ],
     desc: 'Agenda no formato A5, com 1 dia por página e sábados e domingos agrupados na mesma página. Ideal para organizar compromissos, planejar tarefas e manter sua rotina em dia.',
     specs: [
-      'Dimensões: 15,5 × 21,5 cm',
+      'Dimensões: 15,5 × 22 cm',
       'Capa: capa dura personalizada',
-      'Acabamento da capa: laminação brilho',
-      'Encadernação: Wire-o metálico de alta resistência',
+      'Acabamento da capa: laminação brilho, fosco ou holográfico',
+      'Encadernação: Wire-o metálico',
       'Quantidade de páginas: 366 páginas',
       'Tipo de papel: Offset',
       'Gramatura do papel: 75 g/m²'
     ]
   },
   {
-    id: 'agenda-minimalista',
-    title: 'Agenda Mine 1 dia por página',
-    category: 'planners',
-    categoryLabel: 'Agendas',
-    tag: 'Edição Especial',
-    badge: 'Destaque',
-    badgeType: 'sage',
-    price: 'R$ 89,90',
-    priceNum: 89.9,
-    popularity: 92,
-    images: [
-      'assets/images/produtos/agendas/agendaMin-1.jpg',
-      'assets/images/produtos/agendas/agendaMin-2.jpg',
-      'assets/images/produtos/agendas/agendaMin-3.jpg',
-      'assets/images/produtos/agendas/agendaMin-4.jpg',
-      'assets/images/produtos/agendas/agendaMin-5.jpg'
-    ],
-    desc: 'Agenda no formato A6, com 1 dia por página e sábados e domingos agrupados na mesma página. Ideal para organizar compromissos, planejar tarefas e manter sua rotina em dia.',
-    specs: [
-      'Formato: A6 compacto e leve, ideal para transporte diário',
-      'Papel: Papel pólen de alta qualidade que não vaza caneta',
-      'Fechamento: Elástico acetinado colorido',
-      'Cantoneiras: Proteção de metal nas pontas'
-    ]
-  },
-  {
     id: 'agenda-master-2dias',
-    title: 'Agenda Master 2 dias por página',
+    title: 'Agenda A5, 2 dias por página',
     category: 'planners',
     categoryLabel: 'Agendas',
     tag: 'Capa Dura Wire-o',
@@ -112,41 +86,15 @@ window.PRODUTOS_LALATELIE = [
       'assets/images/produtos/agendas/agendaMas_2dias-4.jpg',
       'assets/images/produtos/agendas/agendaMas_2dias-5.jpg'
     ],
-    desc: 'Agenda Master 2 Dias por página, desenvolvida para facilitar a organização diária, o planejamento de compromissos e o registro de tarefas, com dois dias por página. Ideal para planejamento pessoal e profissional, unindo praticidade e acabamento sofisticado.',
+    desc: 'Agenda A5 2 Dias por página, desenvolvida para facilitar a organização diária, o planejamento de compromissos e o registro de tarefas, com dois dias por página. Ideal para planejamento pessoal e profissional, unindo praticidade e acabamento sofisticado.',
     specs: [
-      'Dimensões: 15,5 × 21,5 cm',
-      'Capa: Dura e personalizada',
-      'Acabamento da capa: Laminação brilho',
-      'Encadernação: Wire-o metálico de alta resistência',
+      'Dimensões: 15,5 × 22 cm',
+      'Capa: capa dura e personalizada',
+      'Acabamento da capa: Laminação brilho, fosco ou holográfico',
+      'Encadernação: Wire-o metálico',
       'Quantidade de páginas: 238 páginas',
       'Tipo de papel: Offset',
-      'Gramatura do papel: 75 g/m²'
-    ]
-  },
-  {
-    id: 'agenda-mine-2dias',
-    title: 'Agenda Mine 2 dias por página',
-    category: 'planners',
-    categoryLabel: 'Agendas',
-    tag: 'Edição Especial',
-    badge: '2 Dias por Página',
-    badgeType: 'sage',
-    price: 'R$ 82,90',
-    priceNum: 82.9,
-    popularity: 90,
-    images: [
-      'assets/images/produtos/agendas/agendaMin_2dias-1.jpg',
-      'assets/images/produtos/agendas/agendaMin_2dias-2.jpg',
-      'assets/images/produtos/agendas/agendaMin_2dias-3.jpg',
-      'assets/images/produtos/agendas/agendaMin_2dias-4.jpg',
-      'assets/images/produtos/agendas/agendaMin_2dias-5.jpg'
-    ],
-    desc: 'Agenda no formato A6, com 2 dias por página e sábados e domingos agrupados na mesma página. Ideal para organizar compromissos, planejar tarefas e manter sua rotina em dia.',
-    specs: [
-      'Formato: A6 compacto e leve, ideal para transporte diário',
-      'Miolo: Visão de 2 dias por página em papel pólen suave',
-      'Fechamento: Elástico acetinado colorido',
-      'Cantoneiras: Proteção de metal nas pontas'
+      'Gramatura do papel: 90 g/m²'
     ]
   },
 
@@ -169,7 +117,7 @@ window.PRODUTOS_LALATELIE = [
       'assets/images/produtos/cadernos/caderno4.jpg',
       'assets/images/produtos/cadernos/caderno5.jpg'
     ],
-    desc: 'Caderno com capa dura, ideal para anotações, estudos, atividades escolares e organização pessoal. Ideal para uso escolar, acadêmico ou profissional, oferecendo praticidade para escrever, organizar informações e registrar anotações no dia a dia.',
+    desc: 'Caderno com capa dura, ideal para anotações, estudos, atividades escolares e organização pessoal, oferecendo praticidade para escrever, organizar informações e registrar anotações no dia a dia.',
     specs: [
       'Capa: Dura personalizada',
       'Miolo: Folhas pautadas',
@@ -180,93 +128,13 @@ window.PRODUTOS_LALATELIE = [
     ]
   },
 
-  // ---------------- CALENDÁRIOS ----------------
-  {
-    id: 'calendario-grande',
-    title: 'Calendário de Mesa Grande',
-    category: 'calendarios',
-    categoryLabel: 'Calendários',
-    tag: 'Base Rígida Auto-Portante',
-    badge: 'Mais Vendido',
-    badgeType: 'gold',
-    price: 'R$ 32,90',
-    priceNum: 32.9,
-    popularity: 94,
-    images: [
-      'assets/images/produtos/calendar/cal-Gran1.jpg',
-      'assets/images/produtos/calendar/cal-Gran2.jpg',
-      'assets/images/produtos/calendar/cal-Gran3.jpg',
-      'assets/images/produtos/calendar/cal-Gran4.jpg',
-      'assets/images/produtos/calendar/cal-Gran5.jpg'
-    ],
-    desc: 'Calendário de mesa com excelente espaço de visualização mensal e anotações rápidas. Estrutura rígida de apoio com encadernação wire-o superior.',
-    specs: [
-      'Lâminas: 12 meses + feriados e datas comemorativas',
-      'Papel: Papel fosco texturizado 240g de alta resistência',
-      'Base: Triângulo rígido empastado de alta firmeza',
-      'Design: Ilustrações artísticas exclusivas do ateliê'
-    ]
-  },
-  {
-    id: 'calendario-medio',
-    title: 'Calendário de Mesa Médio',
-    category: 'calendarios',
-    categoryLabel: 'Calendários',
-    tag: 'Formato Equilibrado',
-    badge: 'Prático',
-    badgeType: 'sage',
-    price: 'R$ 25,90',
-    priceNum: 25.9,
-    popularity: 90,
-    images: [
-      'assets/images/produtos/calendar/cal-med1.jpg',
-      'assets/images/produtos/calendar/cal-med2.jpg',
-      'assets/images/produtos/calendar/cal-med3.jpg',
-      'assets/images/produtos/calendar/cal-med4.jpg',
-      'assets/images/produtos/calendar/cal-med5.jpg'
-    ],
-    desc: 'Equilíbrio perfeito de tamanho para compor sua mesa de escritório ou cantinho de estudos sem ocupar espaço excessivo.',
-    specs: [
-      'Tamanho intermediário ideal para escrivaninhas',
-      'Lâminas mensais destacáveis ou viráveis no wire-o',
-      'Acabamento em espiral wire-o nobre',
-      'Cores suaves e tipografia elegante e legível'
-    ]
-  },
-  {
-    id: 'calendario-pequeno',
-    title: 'Mini Calendário de Mesa',
-    category: 'calendarios',
-    categoryLabel: 'Calendários',
-    tag: 'Compacto & Delicado',
-    badge: 'Mimo',
-    badgeType: 'olive',
-    price: 'R$ 17,90',
-    priceNum: 17.9,
-    popularity: 87,
-    images: [
-      'assets/images/produtos/calendar/cal-peq1.jpg',
-      'assets/images/produtos/calendar/cal-peq2.jpg',
-      'assets/images/produtos/calendar/cal-peq3.jpg',
-      'assets/images/produtos/calendar/cal-peq4.jpg',
-      'assets/images/produtos/calendar/cal-peq5.jpg'
-    ],
-    desc: 'Mini calendário de mesa delicado e charmoso. Uma ótima lembrancinha afetiva para presentear amigos, clientes e familiares.',
-    specs: [
-      'Tamanho mini compacto para qualquer espaço',
-      'Lâminas encorpadas com impressão de alta qualidade',
-      'Base auto-portante de fácil manuseio',
-      'Embalado individualmente com carinho'
-    ]
-  },
-
-  // ---------------- TAGS ----------------
+  // ---------------- PAPELARIA ----------------
   {
     id: 'tags-artesanais',
     title: 'Tags & Marcadores',
     category: 'tags',
-    categoryLabel: 'Tags',
-    tag: 'Papel Nobre & Acabamento Manual',
+    categoryLabel: 'Papelaria',
+    tag: 'Papel & Acabamento Manual',
     badge: 'Coleção Exclusiva',
     badgeType: 'gold',
     price: 'Consulte valores e quantidades pelo nosso chat.',
@@ -280,19 +148,19 @@ window.PRODUTOS_LALATELIE = [
       'assets/images/produtos/tags/tags4.jpg',
       'assets/images/produtos/tags/tags5.jpg'
     ],
-    desc: 'Conjunto de tags recortadas à mão com designs exclusivos, detalhes botânicos e cordão para amarração de presentes, convites e encomendas.',
+    desc: 'Tags personalizadas que agregam charme e sofisticação às suas embalagens, perfeitas para fechar sacolas, valorizar presentes e destacar a identidade da sua marca.',
     specs: [
-      'Papel nobre encorpado de alta gramatura',
-      'Fita / cordão rústico ou acetinado incluso',
-      'Personalização com nomes, frases ou logotipo',
-      'Kit com múltiplas unidades prontas para uso'
+      'Papel fotográfico de alta gramatura',
+      'Acabamento de acordo com a sua necessidade',
+      'Impressão de alta qualidade',
+      'Arte e modelos personalizados'
     ]
   },
   {
     id: 'tags-lembrancinhas',
     title: 'Etiquetas',
     category: 'tags',
-    categoryLabel: 'Tags',
+    categoryLabel: 'Papelaria',
     tag: 'Eventos & Presentes',
     badge: 'Novidade',
     badgeType: 'sage',
@@ -307,18 +175,18 @@ window.PRODUTOS_LALATELIE = [
       'assets/images/produtos/tags/etiquetas4.jpg',
       'assets/images/produtos/tags/etiquetas5.jpg'
     ],
-    desc: 'Tags com estampas afetuosas pensadas especialmente para fechar sacolas, pacotes de presente, mimos corporativos ou casamentos.',
+    desc: 'Ideais para complementar embalagens, fechar sacolas, decorar lembrancinhas e valorizar mimos corporativos. Uma solução versátil para transformar detalhes simples em apresentações especiais.',
     specs: [
-      'Formatos e ilustrações afetivas variadas',
-      'Furo padrão com acabamento reforçado',
-      'Impressão de altíssima fidelidade de cores',
-      'Embaladas com carinho em envelope kraft artesanal'
+      'Papéis de gramaturas variadas',
+      'Acabamento de acordo com a sua necessidade',
+      'Impressão de alta qualidade',
+      'Arte e modelos personalizados'
     ]
   }
 ];
 
-// ---------------- 34 OPÇÕES DE CAPAS (EXCLUSIVAS PARA AGENDAS) ----------------
-for (let i = 1; i <= 34; i++) {
+// ---------------- 30 OPÇÕES DE CAPAS (EXCLUSIVAS PARA AGENDAS) ----------------
+for (let i = 1; i <= 30; i++) {
   window.PRODUTOS_LALATELIE.push({
     id: `capa-${i}`,
     title: `Capa para Agenda Modelo ${i}`,
@@ -333,30 +201,22 @@ for (let i = 1; i <= 34; i++) {
 
 /**
  * Formata o título do produto para exibição visual nos cards e páginas.
- * Para a categoria Agendas, aplica destaque tipográfico específico aos números 1 e 2,
- * garantindo legibilidade nítida, formato clássico e proporção visual sem alterar
- * outros produtos ou atributos de acessibilidade.
+ * Retorna o título íntegro garantindo uniformidade tipográfica total entre letras,
+ * números e caracteres especiais com uma única família tipográfica moderna (Plus Jakarta Sans).
  *
  * @param {Object|string} prod - Objeto do produto ou string do título
  * @param {string} [category] - Categoria opcional se prod for string
- * @returns {string} Título formatado em HTML
+ * @returns {string} Título formatado em texto uniforme
  */
 window.formatProductTitle = function(prod, category) {
   if (!prod) return '';
   const title = typeof prod === 'object' ? (prod.title || '') : String(prod);
-  const cat = (typeof prod === 'object' ? (prod.category || prod.categoryLabel) : category) || '';
-  const isAgenda = cat === 'planners' || cat === 'Agendas' || /^agenda\b/i.test(title.trim());
-
-  if (isAgenda) {
-    // Envolve os números nos nomes das agendas com a classe de destaque tipográfico (.agenda-title-number)
-    return title.replace(/\b(\d+)\b/g, '<span class="agenda-title-number">$1</span>');
-  }
   return title;
 };
 
 /**
  * Formata o valor do produto para exibição visual nos cards e páginas.
- * Para produtos sob consulta (como Tags e Etiquetas), exibe a mensagem acompanhada
+ * Para produtos sob consulta (como itens de Papelaria), exibe a mensagem acompanhada
  * do ícone oficial do WhatsApp, permitindo consulta ágil pelo chat do ateliê.
  *
  * @param {Object|string} prod - Objeto do produto ou string do preço
@@ -367,7 +227,7 @@ window.formatProductPrice = function(prod, options = {}) {
   if (!prod) return '';
   const priceStr = typeof prod === 'object' ? (prod.price || '') : String(prod);
   const isConsult = typeof prod === 'object'
-    ? (prod.consultPrice === true || prod.category === 'tags' || /consulte valores/i.test(priceStr))
+    ? (prod.consultPrice === true || prod.category === 'tags' || prod.category === 'papelaria' || /consulte valores/i.test(priceStr))
     : /consulte valores/i.test(priceStr);
 
   if (isConsult) {
@@ -400,8 +260,8 @@ window.LALATELIE_ADDON_CONFIG = {
     {
       id: 'capa',
       name: 'Capa da Agenda (Mostruário Exclusivo)',
-      description: 'Selecione uma das 34 opções de capa em alta definição:',
-      type: 'capa_selector', // tipo especial com grid visual das 34 capas
+      description: 'Selecione uma das 30 opções de capa em alta definição:',
+      type: 'capa_selector', // tipo especial com grid visual das 30 capas
       required: true,
       price: 0
     },
@@ -426,6 +286,18 @@ window.LALATELIE_ADDON_CONFIG = {
         { id: 'com-horario', name: 'Com horário', price: 0, default: true },
         { id: 'sem-horario', name: 'Sem horário', price: 0 }
       ]
+    },
+    {
+      id: 'personalizacao_nome',
+      name: 'Deseja personalizar sua agenda com nome?',
+      description: 'Escolha se deseja colocar seu nome com gravação especial na capa da agenda:',
+      type: 'name_customizer',
+      required: true,
+      price: 0,
+      options: [
+        { id: 'sim', name: 'Sim, quero personalizar com nome.', value: 'sim' },
+        { id: 'nao', name: 'Não, quero minha agenda sem nome.', value: 'nao' }
+      ]
     }
   ],
 
@@ -443,10 +315,7 @@ window.LALATELIE_ADDON_CONFIG = {
         { id: 'liso', name: 'Folhas Lisas (sem pauta)', price: 0 }
       ]
     }
-  ],
-
-  // 3. Regras para Calendários (calendarios)
-  calendarios: []
+  ]
 };
 
 /**
@@ -459,8 +328,8 @@ window.getProductAddonGroups = function(prod) {
   if (!prod) return [];
   // Capas são mostruário, não possuem adicionais
   if (prod.isCapa || prod.category === 'capas') return [];
-  // Tags e Etiquetas são sob consulta no WhatsApp
-  if (prod.consultPrice || prod.category === 'tags') return [];
+  // Itens de Papelaria (Tags e Etiquetas) são sob consulta no WhatsApp
+  if (prod.consultPrice || prod.category === 'tags' || prod.category === 'papelaria') return [];
 
   // Se o próprio produto já declarar addonGroups customizados
   if (Array.isArray(prod.addonGroups)) {
@@ -474,9 +343,6 @@ window.getProductAddonGroups = function(prod) {
   }
   if (cat === 'cadernos-personalizados' || cat === 'cadernos') {
     return window.LALATELIE_ADDON_CONFIG.cadernos || [];
-  }
-  if (cat === 'calendarios' || cat === 'calendario') {
-    return window.LALATELIE_ADDON_CONFIG.calendarios || [];
   }
 
   return [];

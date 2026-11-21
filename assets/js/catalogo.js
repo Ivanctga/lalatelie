@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ? [...window.PRODUTOS_LALATELIE]
     : [];
 
-  // Adiciona as 34 opções de capas se ainda não existirem
+  // Adiciona as 30 opções de capas se ainda não existirem
   if (PRODUTOS_CATALOGO.filter(p => p.category === 'capas').length === 0) {
-    for (let i = 1; i <= 34; i++) {
+    for (let i = 1; i <= 30; i++) {
       PRODUTOS_CATALOGO.push({
         id: `capa-${i}`,
         title: `Capa Modelo ${i}`,
@@ -125,16 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return matchCategory && matchSearch;
     });
 
-    // Ordem oficial das categorias do catálogo: (Agendas, Cadernos, Calendário e Tags)
+    // Ordem oficial das categorias do catálogo: (Agendas, Cadernos e Papelaria)
     const CATEGORY_ORDER = {
       'planners': 1,
       'agendas': 1,
       'cadernos-personalizados': 2,
       'cadernos': 2,
-      'calendarios': 3,
-      'calendario': 3,
-      'tags': 4,
-      'capas': 5
+      'tags': 3,
+      'papelaria': 3,
+      'capas': 4
     };
 
     const getCategoryPriority = (cat) => CATEGORY_ORDER[cat] || 99;
@@ -143,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentCategory === 'capas') {
       filtered.sort((a, b) => (a.capaNum || 0) - (b.capaNum || 0));
     } else if (currentCategory === 'all') {
-      // Na aba Todos, organiza estritamente de acordo com as categorias: Agendas, Cadernos, Calendário e Tags
+      // Na aba Todos, organiza estritamente de acordo com as categorias: Agendas, Cadernos e Papelaria
       filtered.sort((a, b) => {
         const priorityA = getCategoryPriority(a.category);
         const priorityB = getCategoryPriority(b.category);
@@ -192,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="capas-banner-content">
             <i class="fa-solid fa-sparkles"></i>
             <div>
-              <strong>Catálogo de Capas para Agendas (34 Opções)</strong>
+              <strong>Catálogo de Capas para Agendas (30 Opções)</strong>
               <p>Escolha sua capa favorita para personalizar a sua <strong>Agenda</strong>. Clique na capa para ampliar em alta definição.</p>
             </div>
           </div>
@@ -242,9 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="card-product-desc">${item.desc || ''}</p>
             </div>
 
-            <div class="card-footer-row ${(item.consultPrice || item.category === 'tags') ? 'card-footer-row-consult' : ''}">
-              <div class="card-price-box ${(item.consultPrice || item.category === 'tags') ? 'card-price-box-consult' : ''}">
-                ${(item.consultPrice || item.category === 'tags') 
+            <div class="card-footer-row ${(item.consultPrice || item.category === 'tags' || item.category === 'papelaria') ? 'card-footer-row-consult' : ''}">
+              <div class="card-price-box ${(item.consultPrice || item.category === 'tags' || item.category === 'papelaria') ? 'card-price-box-consult' : ''}">
+                ${(item.consultPrice || item.category === 'tags' || item.category === 'papelaria') 
                   ? (window.formatProductPrice ? window.formatProductPrice(item, { withLink: false }) : item.price)
                   : `<span class="price-value">${window.formatProductPrice ? window.formatProductPrice(item, { withLink: false }) : item.price}</span>`
                 }
@@ -873,12 +872,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeCategoryParam = targetCategory;
   if (activeCategoryParam === 'cadernos' || activeCategoryParam === 'caderno') activeCategoryParam = 'cadernos-personalizados';
   if (activeCategoryParam === 'agendas' || activeCategoryParam === 'agenda') activeCategoryParam = 'planners';
-  if (activeCategoryParam === 'calendario') activeCategoryParam = 'calendarios';
+  if (activeCategoryParam === 'papelaria' || activeCategoryParam === 'tags') activeCategoryParam = 'tags';
 
   updateCategoryCounters();
   setViewMode(currentViewMode, false);
 
-  if (activeCategoryParam && ['planners', 'cadernos-personalizados', 'calendarios', 'tags', 'capas'].includes(activeCategoryParam)) {
+  if (activeCategoryParam && ['planners', 'cadernos-personalizados', 'tags', 'capas'].includes(activeCategoryParam)) {
     setCategory(activeCategoryParam, false);
 
     // Scroll suave até a seção de produtos preservando o contexto de navegação

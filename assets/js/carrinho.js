@@ -72,7 +72,16 @@
         // Recalcula unitPrice e subtotal
         let addonsSum = 0;
         if (Array.isArray(item.customizations)) {
+          item.customizations.forEach(c => {
+            if ((c.isCapa || c.groupId === 'capa' || c.capaNum) && Number(c.capaNum) > 30) {
+              c.capaNum = 1;
+              c.value = 'Capa Modelo 1';
+            }
+          });
           addonsSum = item.customizations.reduce((acc, c) => acc + (Number(c.price) || 0), 0);
+        }
+        if (item.image && /capas(31|32|33|34)\.jpg/i.test(item.image)) {
+          item.image = 'assets/images/produtos/capas/capas1.jpg';
         }
         item.unitPrice = roundMoney(item.basePrice + addonsSum);
         item.quantity = Math.max(1, parseInt(item.quantity, 10) || 1);
@@ -764,16 +773,19 @@
           ? '<span class="addon-group-req-badge required">Obrigatório</span>'
           : '<span class="addon-group-req-badge optional">Opcional</span>';
 
-        // Caso Especial 1: Seletor de 34 Capas para Agendas
+        // Caso Especial 1: Seletor de 30 Capas para Agendas
         if (group.type === 'capa_selector') {
           let selectedCapaNum = 1;
           if (preselected) {
             const foundCapa = preselected.find(c => c.isCapa || c.capaNum || /Capa/i.test(c.group));
-            if (foundCapa && foundCapa.capaNum) selectedCapaNum = foundCapa.capaNum;
+            if (foundCapa && foundCapa.capaNum) {
+              const numParsed = parseInt(foundCapa.capaNum, 10);
+              if (numParsed >= 1 && numParsed <= 30) selectedCapaNum = numParsed;
+            }
           }
 
           let capasCards = '';
-          for (let i = 1; i <= 34; i++) {
+          for (let i = 1; i <= 30; i++) {
             const isSel = i === selectedCapaNum;
             capasCards += `
               <div class="addon-capa-card ${isSel ? 'is-selected' : ''}" data-capa-num="${i}">
@@ -865,6 +877,64 @@
           `;
         }
 
+        // Caso 4: Personalização com Nome (Agendas)
+        if (group.type === 'name_customizer') {
+          let selectedOpt = null;
+          let typedName = '';
+
+          if (preselected) {
+            const nomeOpt = preselected.find(c => c.groupId === group.id || c.group === 'Personalização');
+            if (nomeOpt) {
+              if (nomeOpt.optionId === 'sim' || /com nome/i.test(nomeOpt.value)) {
+                selectedOpt = 'sim';
+              } else if (nomeOpt.optionId === 'nao' || /sem nome/i.test(nomeOpt.value)) {
+                selectedOpt = 'nao';
+              }
+            }
+            const nameItem = preselected.find(c => c.groupId === 'nome_personalizado' || /nome na agenda/i.test(c.group));
+            if (nameItem && nameItem.value) {
+              typedName = nameItem.value.trim().slice(0, 30);
+            }
+          }
+
+          const isSim = selectedOpt === 'sim';
+          const isNao = selectedOpt === 'nao';
+
+          return `
+            <div class="addon-group-section addon-group-name-customizer" data-group-id="${group.id}" data-type="name_customizer" data-required="${isRequired}">
+              <div class="addon-group-header">
+                <h4 class="addon-group-title"><i class="fa-solid fa-signature"></i> ${group.name}</h4>
+                ${reqBadge}
+              </div>
+              ${group.description ? `<p class="addon-group-desc">${group.description}</p>` : ''}
+              <div class="addon-options-grid-single">
+                <label class="addon-radio-card ${isSim ? 'is-selected' : ''}">
+                  <input type="radio" name="addon_group_${group.id}" value="sim" data-name="Sim, quero personalizar com nome." ${isSim ? 'checked' : ''}>
+                  <span class="addon-radio-name">Sim, quero personalizar com nome.</span>
+                </label>
+                <label class="addon-radio-card ${isNao ? 'is-selected' : ''}">
+                  <input type="radio" name="addon_group_${group.id}" value="nao" data-name="Não, quero minha agenda sem nome." ${isNao ? 'checked' : ''}>
+                  <span class="addon-radio-name">Não, quero minha agenda sem nome.</span>
+                </label>
+              </div>
+
+              <div class="addon-custom-name-box" id="modalCustomNameBox" style="display: ${isSim ? 'block' : 'none'};">
+                <label for="modalInputCustomName" class="addon-custom-name-label">
+                  <i class="fa-solid fa-pen-clip"></i> Digite o nome para personalização <strong class="req-star">*</strong>
+                </label>
+                <div class="addon-custom-name-input-wrap">
+                  <input type="text" id="modalInputCustomName" class="addon-custom-name-input" placeholder="Ex.: Maria Silva" maxlength="30" value="${typedName}" autocomplete="off" spellcheck="false">
+                  <span class="addon-custom-name-counter" id="modalNameCharCounter">${typedName.length}/30</span>
+                </div>
+                <span class="addon-custom-name-hint">Limite de 30 caracteres • Sem custo adicional</span>
+                <span class="addon-custom-name-error" id="modalCustomNameError" style="display: none;">
+                  <i class="fa-solid fa-circle-exclamation"></i> Por favor, digite o nome para personalização da sua agenda.
+                </span>
+              </div>
+            </div>
+          `;
+        }
+
         return '';
       }).join('');
 
@@ -905,6 +975,67 @@
           this.updateQtyAndPrice();
         });
       });
+
+      // Eventos do seletor de personalização com nome (name_customizer)
+      const nameRadioInputs = form.querySelectorAll('input[name="addon_group_personalizacao_nome"]');
+      nameRadioInputs.forEach(radio => {
+        radio.addEventListener('change', () => {
+          const parentGroup = radio.closest('.addon-group-section');
+          if (parentGroup) {
+            parentGroup.querySelectorAll('.addon-radio-card').forEach(l => l.classList.remove('is-selected'));
+          }
+          radio.closest('.addon-radio-card').classList.add('is-selected');
+
+          const nameBox = document.getElementById('modalCustomNameBox');
+          const nameInput = document.getElementById('modalInputCustomName');
+          const nameError = document.getElementById('modalCustomNameError');
+          const charCounter = document.getElementById('modalNameCharCounter');
+
+          if (radio.value === 'sim') {
+            if (nameBox) nameBox.style.display = 'block';
+            if (nameInput) {
+              setTimeout(() => nameInput.focus(), 50);
+            }
+          } else {
+            if (nameBox) nameBox.style.display = 'none';
+            if (nameInput) {
+              nameInput.value = '';
+              nameInput.classList.remove('has-error');
+            }
+            if (charCounter) charCounter.textContent = '0/30';
+            if (nameError) nameError.style.display = 'none';
+          }
+          this.updateQtyAndPrice();
+        });
+      });
+
+      const modalNameInput = document.getElementById('modalInputCustomName');
+      if (modalNameInput) {
+        modalNameInput.addEventListener('input', (e) => {
+          let val = e.target.value;
+          if (val.length > 30) {
+            val = val.slice(0, 30);
+            e.target.value = val;
+          }
+          const counter = document.getElementById('modalNameCharCounter');
+          if (counter) counter.textContent = `${val.length}/30`;
+
+          if (val.trim().length > 0) {
+            modalNameInput.classList.remove('has-error');
+            const err = document.getElementById('modalCustomNameError');
+            if (err) err.style.display = 'none';
+          }
+        });
+
+        modalNameInput.addEventListener('blur', () => {
+          const trimmed = modalNameInput.value.trim();
+          if (modalNameInput.value !== trimmed) {
+            modalNameInput.value = trimmed;
+            const counter = document.getElementById('modalNameCharCounter');
+            if (counter) counter.textContent = `${trimmed.length}/30`;
+          }
+        });
+      }
     },
 
     getSelectedOptions() {
@@ -917,7 +1048,8 @@
       groups.forEach(group => {
         if (group.type === 'capa_selector') {
           const capaInput = document.getElementById('addonSelectedCapaInput');
-          const capaNum = capaInput ? parseInt(capaInput.value, 10) : 1;
+          let capaNum = capaInput ? parseInt(capaInput.value, 10) : 1;
+          if (isNaN(capaNum) || capaNum < 1 || capaNum > 30) capaNum = 1;
           customizations.push({
             groupId: group.id,
             group: 'Capa',
@@ -948,6 +1080,37 @@
               price: Number(chk.getAttribute('data-price')) || 0
             });
           });
+        } else if (group.type === 'name_customizer') {
+          const selectedRadio = form.querySelector(`input[name="addon_group_${group.id}"]:checked`);
+          if (selectedRadio) {
+            if (selectedRadio.value === 'sim') {
+              const nameInput = document.getElementById('modalInputCustomName');
+              const cleanName = nameInput ? nameInput.value.trim() : '';
+              customizations.push({
+                groupId: group.id,
+                group: 'Personalização',
+                optionId: 'sim',
+                value: 'Com nome',
+                price: 0
+              });
+              if (cleanName) {
+                customizations.push({
+                  groupId: 'nome_personalizado',
+                  group: 'Nome na Agenda',
+                  value: cleanName,
+                  price: 0
+                });
+              }
+            } else {
+              customizations.push({
+                groupId: group.id,
+                group: 'Personalização',
+                optionId: 'nao',
+                value: 'Sem nome',
+                price: 0
+              });
+            }
+          }
         }
       });
 
@@ -967,6 +1130,26 @@
             if (!hasChecked) {
               alert(`Por favor, selecione uma opção para o campo obrigatório "${group.name}".`);
               return false;
+            }
+          } else if (group.type === 'name_customizer') {
+            const hasChecked = form.querySelector(`input[name="addon_group_${group.id}"]:checked`);
+            if (!hasChecked) {
+              alert('Por favor, informe se deseja personalizar sua agenda com nome.');
+              return false;
+            }
+            if (hasChecked.value === 'sim') {
+              const nameInput = document.getElementById('modalInputCustomName');
+              const cleanName = nameInput ? nameInput.value.trim() : '';
+              if (!cleanName) {
+                if (nameInput) {
+                  nameInput.classList.add('has-error');
+                  nameInput.focus();
+                }
+                const err = document.getElementById('modalCustomNameError');
+                if (err) err.style.display = 'flex';
+                alert('Por favor, digite o nome para personalização da sua agenda.');
+                return false;
+              }
             }
           }
         }
@@ -1038,8 +1221,8 @@
       }
       if (!product) return;
 
-      // Se for produto sob consulta
-      if (product.consultPrice || product.category === 'tags') {
+      // Se for produto sob consulta (papelaria)
+      if (product.consultPrice || product.category === 'tags' || product.category === 'papelaria') {
         const msg = encodeURIComponent(`Olá, Lalateliê! Gostaria de consultar valores e quantidades para "${product.title}".`);
         window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, '_blank', 'noopener,noreferrer');
         return;
@@ -1056,8 +1239,8 @@
       }
       if (!product) return;
 
-      // Se for produto sob consulta (tags/etiquetas)
-      if (product.consultPrice || product.category === 'tags') {
+      // Se for produto sob consulta (papelaria)
+      if (product.consultPrice || product.category === 'tags' || product.category === 'papelaria') {
         const msg = encodeURIComponent(`Olá, Lalateliê! Gostaria de consultar valores e quantidades para "${product.title}".`);
         window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, '_blank', 'noopener,noreferrer');
         return;

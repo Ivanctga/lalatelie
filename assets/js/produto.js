@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'planners': 'Agendas',
     'cadernos-personalizados': 'Cadernos',
     'cadernos': 'Cadernos',
-    'calendarios': 'Calendários',
-    'tags': 'Tags',
+    'tags': 'Papelaria',
+    'papelaria': 'Papelaria',
     'all': 'Catálogo'
   };
 
@@ -30,7 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const productId = urlParams.get('id') || urlParams.get('produto');
   const fromCategory = urlParams.get('categoria') || urlParams.get('cat') || urlParams.get('from');
   const selectedCapa = urlParams.get('capa');
-  let activeSelectedCapa = selectedCapa || null;
+  let activeSelectedCapa = null;
+  if (selectedCapa) {
+    const capaInt = parseInt(selectedCapa, 10);
+    if (capaInt >= 1 && capaInt <= 30) {
+      activeSelectedCapa = String(capaInt);
+    }
+  }
 
   // Características da Agenda (Fechamento e Miolo/Horário)
   const VALID_FECHAMENTOS = ['Sem fechamento', 'Fechamento com elástico'];
@@ -48,6 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const rawHorario = urlParams.get('horario') || urlParams.get('miolo');
   let activeSelectedHorario = VALID_HORARIOS.includes(rawHorario) ? rawHorario : null;
+
+  // Personalização com Nome (Agendas)
+  const rawNomeOpt = urlParams.get('personalizacao_nome');
+  let activeSelectedNomeOption = (rawNomeOpt === 'sim' || rawNomeOpt === 'nao') ? rawNomeOpt : null;
+  let activeCustomName = (urlParams.get('nome') || '').trim().slice(0, 30);
 
   let featureButtonsInitialized = false;
   let capaPickerInitialized = false;
@@ -138,16 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
           'agendaMas-5.jpg'
         ]
       },
-      'agenda-minimalista': {
-        folder: 'agendas',
-        files: [
-          'agendaMin-1.jpg',
-          'agendaMin-2.jpg',
-          'agendaMin-3.jpg',
-          'agendaMin-4.jpg',
-          'agendaMin-5.jpg'
-        ]
-      },
       'agenda-master-2dias': {
         folder: 'agendas',
         files: [
@@ -158,16 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
           'agendaMas_2dias-5.jpg'
         ]
       },
-      'agenda-mine-2dias': {
-        folder: 'agendas',
-        files: [
-          'agendaMin_2dias-1.jpg',
-          'agendaMin_2dias-2.jpg',
-          'agendaMin_2dias-3.jpg',
-          'agendaMin_2dias-4.jpg',
-          'agendaMin_2dias-5.jpg'
-        ]
-      },
       'caderno-personalizado': {
         folder: 'cadernos',
         files: [
@@ -176,36 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
           'caderno3.jpg',
           'caderno4.jpg',
           'caderno5.jpg'
-        ]
-      },
-      'calendario-grande': {
-        folder: 'calendar',
-        files: [
-          'cal-Gran1.jpg',
-          'cal-Gran2.jpg',
-          'cal-Gran3.jpg',
-          'cal-Gran4.jpg',
-          'cal-Gran5.jpg'
-        ]
-      },
-      'calendario-medio': {
-        folder: 'calendar',
-        files: [
-          'cal-med1.jpg',
-          'cal-med2.jpg',
-          'cal-med3.jpg',
-          'cal-med4.jpg',
-          'cal-med5.jpg'
-        ]
-      },
-      'calendario-pequeno': {
-        folder: 'calendar',
-        files: [
-          'cal-peq1.jpg',
-          'cal-peq2.jpg',
-          'cal-peq3.jpg',
-          'cal-peq4.jpg',
-          'cal-peq5.jpg'
         ]
       },
       'tags-artesanais': {
@@ -311,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const isConsult = prod.consultPrice === true || prod.category === 'tags';
+    const isConsult = prod.consultPrice === true || prod.category === 'tags' || prod.category === 'papelaria';
     if (priceAmount) {
       if (isConsult && window.formatProductPrice) {
         priceAmount.innerHTML = window.formatProductPrice(prod, { withLink: true });
@@ -353,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="payment-option-item">
             <i class="fa-brands fa-pix" aria-hidden="true"></i>
-            <span><strong>Pix:</strong> <span class="payment-highlight">5% OFF</span> à vista</span>
+            <span><strong>Pix</strong> à vista</span>
           </div>
         `;
       }
@@ -410,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // GESTÃO DE CARACTERÍSTICAS DA AGENDA (FECHAMENTO E MIOLO)
+  // GESTÃO DE CARACTERÍSTICAS DA AGENDA (FECHAMENTO, MIOLO E PERSONALIZAÇÃO COM NOME)
   // --------------------------------------------------------------------------
 
   function initFeatureButtons() {
@@ -442,9 +403,60 @@ document.addEventListener('DOMContentLoaded', () => {
             setHorarioOption(val);
             showToast(`Miolo "${val}" selecionado!`);
           }
+        } else if (group === 'personalizacao_nome') {
+          if (activeSelectedNomeOption === val) {
+            setNomeOption(null);
+            showToast('Opção de personalização com nome desmarcada.');
+          } else {
+            setNomeOption(val);
+            if (val === 'sim') {
+              showToast('Opção com nome selecionada! Digite o nome desejado.');
+            } else {
+              showToast('Opção sem nome selecionada.');
+            }
+          }
         }
       });
     });
+
+    // Eventos do campo de digitação do nome personalizado
+    const inputCustomName = document.getElementById('agendaInputCustomName');
+    if (inputCustomName) {
+      inputCustomName.addEventListener('input', (e) => {
+        let val = e.target.value;
+        if (val.length > 30) {
+          val = val.slice(0, 30);
+          e.target.value = val;
+        }
+        const counter = document.getElementById('agendaNameCharCounter');
+        if (counter) {
+          counter.textContent = `${val.length}/30`;
+        }
+        const trimmed = val.trim();
+        if (trimmed.length > 0) {
+          inputCustomName.classList.remove('has-error');
+          const err = document.getElementById('agendaCustomNameError');
+          if (err) err.style.display = 'none';
+        }
+        activeCustomName = trimmed;
+        renderSelectedItemsSection();
+        updateWhatsappLink();
+        updateUrlCustomizationParams();
+      });
+
+      inputCustomName.addEventListener('blur', () => {
+        const trimmed = inputCustomName.value.trim();
+        if (inputCustomName.value !== trimmed) {
+          inputCustomName.value = trimmed;
+          const counter = document.getElementById('agendaNameCharCounter');
+          if (counter) counter.textContent = `${trimmed.length}/30`;
+        }
+        activeCustomName = trimmed;
+        renderSelectedItemsSection();
+        updateWhatsappLink();
+        updateUrlCustomizationParams();
+      });
+    }
 
     featureButtonsInitialized = true;
   }
@@ -459,6 +471,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setHorarioOption(val) {
     activeSelectedHorario = val;
+    syncFeatureButtonsUI();
+    renderSelectedItemsSection();
+    updateWhatsappLink();
+    updateUrlCustomizationParams();
+  }
+
+  function setNomeOption(val) {
+    activeSelectedNomeOption = val;
+    const nameBox = document.getElementById('agendaCustomNameBox');
+    const inputCustomName = document.getElementById('agendaInputCustomName');
+    const nameError = document.getElementById('agendaCustomNameError');
+    const charCounter = document.getElementById('agendaNameCharCounter');
+
+    if (val === 'sim') {
+      if (nameBox) nameBox.style.display = 'block';
+      if (inputCustomName) {
+        if (activeCustomName) {
+          inputCustomName.value = activeCustomName;
+          if (charCounter) charCounter.textContent = `${activeCustomName.length}/30`;
+        }
+        setTimeout(() => inputCustomName.focus(), 50);
+      }
+    } else {
+      // Quando 'nao' ou null: fecha o campo, reseta valor e não envia nome preenchido
+      if (nameBox) nameBox.style.display = 'none';
+      if (inputCustomName) {
+        inputCustomName.value = '';
+        inputCustomName.classList.remove('has-error');
+      }
+      activeCustomName = '';
+      if (charCounter) charCounter.textContent = '0/30';
+      if (nameError) nameError.style.display = 'none';
+    }
+
     syncFeatureButtonsUI();
     renderSelectedItemsSection();
     updateWhatsappLink();
@@ -508,6 +554,34 @@ document.addEventListener('DOMContentLoaded', () => {
         statusHorario.classList.remove('has-selection');
       }
     }
+
+    // Grupo Personalização com Nome
+    const nomeBtns = card.querySelectorAll('.btn-feature-option[data-group="personalizacao_nome"]');
+    nomeBtns.forEach(btn => {
+      const val = btn.getAttribute('data-value');
+      const isSelected = val === activeSelectedNomeOption;
+      btn.classList.toggle('is-selected', isSelected);
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+
+    const statusNome = document.getElementById('statusPersonalizacaoNome');
+    if (statusNome) {
+      if (activeSelectedNomeOption === 'sim') {
+        statusNome.textContent = 'Com nome';
+        statusNome.classList.add('has-selection');
+      } else if (activeSelectedNomeOption === 'nao') {
+        statusNome.textContent = 'Sem nome';
+        statusNome.classList.add('has-selection');
+      } else {
+        statusNome.textContent = 'Nenhum selecionado';
+        statusNome.classList.remove('has-selection');
+      }
+    }
+
+    const nameBox = document.getElementById('agendaCustomNameBox');
+    if (nameBox) {
+      nameBox.style.display = activeSelectedNomeOption === 'sim' ? 'block' : 'none';
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -517,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateWhatsappLink() {
     if (!btnWhatsappHero || !currentProduct) return;
     const isAgenda = currentProduct.category === 'planners';
-    const isConsult = currentProduct.consultPrice || currentProduct.category === 'tags';
+    const isConsult = currentProduct.consultPrice || currentProduct.category === 'tags' || currentProduct.category === 'papelaria';
     let msgText = isConsult
       ? `Olá, Lalateliê! Estava visualizando o produto "${currentProduct.title}" no catálogo e gostaria de consultar valores e quantidades para fazer um pedido.`
       : `Olá, Lalateliê! Estava visualizando o produto "${currentProduct.title}" (${currentProduct.price}) na página exclusiva e gostaria de tirar dúvidas e solicitar a personalização com vocês.`;
@@ -533,6 +607,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (activeSelectedHorario) {
         customizations.push(`Miolo: ${activeSelectedHorario}`);
       }
+      if (activeSelectedNomeOption === 'sim') {
+        customizations.push(activeCustomName ? `Personalização: Com nome ("${activeCustomName}")` : 'Personalização: Com nome');
+      } else if (activeSelectedNomeOption === 'nao') {
+        customizations.push('Personalização: Sem nome');
+      }
 
       if (customizations.length > 0) {
         msgText = `Olá, Lalateliê! Gostaria de encomendar a "${currentProduct.title}" (${currentProduct.price}) com as opções: ${customizations.join(' | ')}.`;
@@ -544,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function initAddToCartHero() {
     if (!btnAddToCartHero || !currentProduct) return;
 
-    const isConsult = currentProduct.consultPrice || currentProduct.category === 'tags';
+    const isConsult = currentProduct.consultPrice || currentProduct.category === 'tags' || currentProduct.category === 'papelaria';
     if (isConsult) {
       btnAddToCartHero.style.display = 'none';
       return;
@@ -558,11 +637,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const isAgenda = currentProduct.category === 'planners';
 
         if (isAgenda) {
-          // Validação: para agendas, a capa é uma escolha de personalização
+          // Validação 1: Capa da agenda
           if (!activeSelectedCapa) {
             showToast('Por favor, selecione uma capa para sua agenda.');
             openCapaPickerModal();
             return;
+          }
+
+          // Validação 2: Opção de personalização com nome (Obrigatório selecionar Sim ou Não)
+          if (!activeSelectedNomeOption) {
+            showToast('Por favor, escolha se deseja personalizar sua agenda com nome.');
+            const nomeGroup = document.getElementById('agendaPersonalizacaoNomeGroup');
+            if (nomeGroup) {
+              nomeGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              nomeGroup.classList.add('highlight-attention');
+              setTimeout(() => nomeGroup.classList.remove('highlight-attention'), 1600);
+            }
+            return;
+          }
+
+          // Validação 3: Se escolheu "Sim, quero personalizar com nome", o campo é obrigatório
+          if (activeSelectedNomeOption === 'sim') {
+            const inputName = document.getElementById('agendaInputCustomName');
+            const cleanName = inputName ? inputName.value.trim() : '';
+            if (!cleanName) {
+              const errEl = document.getElementById('agendaCustomNameError');
+              if (errEl) errEl.style.display = 'flex';
+              if (inputName) {
+                inputName.classList.add('has-error');
+                inputName.focus();
+              }
+              const nomeGroup = document.getElementById('agendaPersonalizacaoNomeGroup');
+              if (nomeGroup) {
+                nomeGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+              showToast('Por favor, digite o nome para personalização da sua agenda.');
+              return;
+            }
+            activeCustomName = cleanName;
           }
 
           const fechamento = activeSelectedFechamento || 'Sem fechamento';
@@ -591,13 +703,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           ];
 
+          // Registro independente e limpo da personalização de nome
+          if (activeSelectedNomeOption === 'sim') {
+            customizations.push({
+              groupId: 'personalizacao_nome',
+              group: 'Personalização',
+              value: 'Com nome',
+              price: 0
+            });
+            customizations.push({
+              groupId: 'nome_personalizado',
+              group: 'Nome na Agenda',
+              value: activeCustomName,
+              price: 0
+            });
+          } else {
+            // Se "Não, quero minha agenda sem nome": apenas a tag "Sem nome" é enviada
+            customizations.push({
+              groupId: 'personalizacao_nome',
+              group: 'Personalização',
+              value: 'Sem nome',
+              price: 0
+            });
+          }
+
           if (window.LalatelieCart) {
             window.LalatelieCart.addItem(currentProduct, customizations, 1);
             window.LalatelieCart.showToast(`"${currentProduct.title}" adicionada ao carrinho!`);
             window.LalatelieCart.openDrawer();
           }
         } else {
-          // Para outros produtos (cadernos, calendários)
+          // Para outros produtos (cadernos)
           if (window.LalatelieCart) {
             window.LalatelieCart.handleProductAddClick(currentProduct);
           }
@@ -631,7 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       capasCallout.innerHTML = `
         <i class="fa-solid fa-palette"></i>
-        <span>Confira as <strong>34 opções de capas para Agendas</strong> e <button type="button" class="link-capas-inline-btn" id="btnCalloutOpenPicker">escolha seu modelo favorito</button> na encomenda!</span>
+        <span>Confira as <strong>30 opções de capas para Agendas</strong> e <button type="button" class="link-capas-inline-btn" id="btnCalloutOpenPicker">escolha seu modelo favorito</button> na encomenda!</span>
       `;
       capasCallout.style.borderColor = '';
       capasCallout.style.borderLeft = '';
@@ -660,6 +796,17 @@ document.addEventListener('DOMContentLoaded', () => {
         url.searchParams.set('horario', activeSelectedHorario);
       } else {
         url.searchParams.delete('horario');
+      }
+      if (activeSelectedNomeOption) {
+        url.searchParams.set('personalizacao_nome', activeSelectedNomeOption);
+        if (activeSelectedNomeOption === 'sim' && activeCustomName) {
+          url.searchParams.set('nome', activeCustomName);
+        } else {
+          url.searchParams.delete('nome');
+        }
+      } else {
+        url.searchParams.delete('personalizacao_nome');
+        url.searchParams.delete('nome');
       }
       window.history.replaceState({}, '', url);
     } catch (err) {
@@ -691,6 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeSelectedCapa) totalItems++;
     if (activeSelectedFechamento) totalItems++;
     if (activeSelectedHorario) totalItems++;
+    if (activeSelectedNomeOption) totalItems++;
 
     if (badge) {
       badge.textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'itens'}`;
@@ -704,7 +852,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="empty-text-box">
             <p class="empty-title">Nenhum item selecionado</p>
-            <p class="empty-subtext">Escolha a capa, o fechamento e o miolo para personalizar sua agenda.</p>
+            <p class="empty-subtext">Escolha a capa, o fechamento, o miolo e a personalização de nome para sua agenda.</p>
           </div>
           <button type="button" class="btn-select-capa-action" id="btnSelectedChooseCapa">
             <i class="fa-solid fa-palette"></i>
@@ -798,6 +946,37 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
+    // 4. Personalização com Nome Selecionada
+    if (activeSelectedNomeOption) {
+      const isComNome = activeSelectedNomeOption === 'sim';
+      const titleText = isComNome
+        ? (activeCustomName ? `Personalização: Com nome ("${activeCustomName}")` : 'Personalização: Com nome')
+        : 'Personalização: Sem nome';
+      const descText = isComNome
+        ? (activeCustomName ? `Nome gravado na capa da agenda: "${activeCustomName}".` : 'Nome para personalização a ser gravado na capa da agenda.')
+        : 'Agenda confeccionada sem nome gravado na capa.';
+
+      rowsHtml += `
+        <div class="selected-item-row" data-type="nome">
+          <div class="selected-item-thumb selected-item-thumb-icon">
+            <i class="fa-solid fa-signature"></i>
+            <span class="selected-item-badge-pill">Nome</span>
+          </div>
+          <div class="selected-item-info">
+            <span class="selected-item-tag">Personalização da Agenda</span>
+            <h4 class="selected-item-title">${titleText}</h4>
+            <p class="selected-item-desc">${descText}</p>
+          </div>
+          <div class="selected-item-actions">
+            <button type="button" class="btn-selected-action btn-remove" id="btnSelectedRemoveNome" title="Remover opção de nome" aria-label="Remover opção de nome">
+              <i class="fa-solid fa-trash-can"></i>
+              <span>Remover</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
     // Se nenhuma capa foi selecionada ainda, oferece sugestão para escolher capa
     if (!activeSelectedCapa) {
       rowsHtml += `
@@ -821,6 +1000,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnRemoveCapa = document.getElementById('btnSelectedRemoveCapa');
     const btnRemoveFechamento = document.getElementById('btnSelectedRemoveFechamento');
     const btnRemoveHorario = document.getElementById('btnSelectedRemoveHorario');
+    const btnRemoveNome = document.getElementById('btnSelectedRemoveNome');
     const btnChooseInline = document.getElementById('btnSelectedChooseCapaInline');
 
     if (btnChange) {
@@ -848,6 +1028,12 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Opção de miolo desmarcada.');
       });
     }
+    if (btnRemoveNome) {
+      btnRemoveNome.addEventListener('click', () => {
+        setNomeOption(null);
+        showToast('Opção de personalização com nome desmarcada.');
+      });
+    }
     if (btnChooseInline) {
       btnChooseInline.addEventListener('click', openCapaPickerModal);
     }
@@ -861,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!capaPickerInitialized) {
       let capasHtml = '';
-      for (let i = 1; i <= 34; i++) {
+      for (let i = 1; i <= 30; i++) {
         capasHtml += `
           <button type="button" class="capa-picker-item" data-capa-num="${i}" aria-label="Selecionar Capa Modelo ${i}">
             <div class="capa-picker-thumb">
@@ -923,13 +1109,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function selectCapa(capaNum) {
-    activeSelectedCapa = String(capaNum);
+    const num = parseInt(capaNum, 10);
+    if (isNaN(num) || num < 1 || num > 30) return;
+    activeSelectedCapa = String(num);
     updateUrlCapaParam();
     renderSelectedItemsSection();
     updateWhatsappLink();
     updateCapasCallout();
     closeCapaPickerModal();
-    showToast(`Capa Modelo ${capaNum} selecionada para sua agenda!`);
+    showToast(`Capa Modelo ${num} selecionada para sua agenda!`);
   }
 
   // --------------------------------------------------------------------------
@@ -1104,24 +1292,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const returnCatParam = fromCategory ? `&categoria=${encodeURIComponent(fromCategory)}` : `&categoria=${encodeURIComponent(current.category)}`;
 
-    relatedGrid.innerHTML = related.map(item => `
-      <article class="related-card" data-id="${item.id}">
-        <div class="related-card-media">
-          <img src="${item.images[0]}" alt="${item.title}" class="related-card-img" loading="lazy">
-        </div>
-        <div class="related-card-body">
-          <span class="related-card-tag">${item.categoryLabel}</span>
-          <h3 class="related-card-title">${window.formatProductTitle ? window.formatProductTitle(item) : item.title}</h3>
-          <div class="related-card-footer">
-            <span class="related-card-price">${window.formatProductPrice ? window.formatProductPrice(item, { withLink: false }) : item.price}</span>
-            <a href="produto.html?id=${encodeURIComponent(item.id)}${returnCatParam}" class="btn-related-view" aria-label="Visualizar produto ${item.title}">
-              <span>Ver Produto</span>
-              <i class="fa-solid fa-arrow-right"></i>
+    relatedGrid.innerHTML = related.map(item => {
+      const productUrl = `produto.html?id=${encodeURIComponent(item.id)}${returnCatParam}`;
+      const isConsult = item.consultPrice || item.category === 'tags' || item.category === 'papelaria';
+      const formattedTitle = window.formatProductTitle ? window.formatProductTitle(item) : item.title;
+      const formattedPrice = window.formatProductPrice ? window.formatProductPrice(item, { withLink: false }) : item.price;
+      const descText = item.desc || '';
+
+      return `
+        <article class="related-card" data-id="${item.id}">
+          <div class="related-card-media-wrapper">
+            <a href="${productUrl}" class="related-card-media-link" aria-label="Visualizar produto ${item.title}" tabindex="-1">
+              <img src="${item.images[0]}" alt="${item.title}" class="related-card-img" loading="lazy">
+              <div class="related-card-overlay" aria-hidden="true">
+                <span class="related-card-quick-pill">
+                  <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                  <span>Ver detalhes</span>
+                </span>
+              </div>
             </a>
+            <span class="related-card-badge">${item.categoryLabel || ''}</span>
           </div>
-        </div>
-      </article>
-    `).join('');
+
+          <div class="related-card-body">
+            <div class="related-card-content">
+              <div class="related-card-meta">
+                <span class="related-card-tag">${item.categoryLabel || ''}${item.tag ? ` • ${item.tag}` : ''}</span>
+              </div>
+              <h3 class="related-card-title">
+                <a href="${productUrl}" title="${item.title}">${formattedTitle}</a>
+              </h3>
+              ${descText ? `<p class="related-card-desc">${descText}</p>` : ''}
+            </div>
+
+            <div class="related-card-footer ${isConsult ? 'related-card-footer-consult' : ''}">
+              <div class="related-card-price-wrap">
+                <span class="related-card-price-label">${isConsult ? 'Atendimento' : 'A partir de'}</span>
+                <span class="related-card-price">${formattedPrice}</span>
+              </div>
+              <a href="${productUrl}" class="btn-related-view" aria-label="Visualizar produto ${item.title}">
+                <span>Ver Produto</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    // Adiciona interação acessível no card inteiro ao clicar fora de links existentes
+    relatedGrid.querySelectorAll('.related-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        const mainLink = card.querySelector('.btn-related-view');
+        if (mainLink && mainLink.href) {
+          window.location.href = mainLink.href;
+        }
+      });
+    });
   }
 
   // --------------------------------------------------------------------------

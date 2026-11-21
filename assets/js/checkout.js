@@ -15,7 +15,7 @@
     pixKey: 'lalatelie.afetiva@gmail.com', // Chave Pix cadastrada para o Ateliê
     pixName: 'LALATELIE PAPELARIA AFETIVA',
     pixCity: 'IPATINGA',
-    pixDiscountPercent: 0.05 // 5% de desconto à vista no Pix
+    pixDiscountPercent: 0 // Sem desconto no Pix
   };
 
   // Estado Central do Checkout
@@ -265,8 +265,7 @@
       const shippingPrice = 0; // Frete combinado no WhatsApp sem cobrança embutida
       
       let discountPix = 0;
-      if (CheckoutState.paymentMethod === 'pix' && subtotal > 0) {
-        // Desconto de 5% sobre o subtotal dos produtos no Pix
+      if (CheckoutState.paymentMethod === 'pix' && subtotal > 0 && ATELIE_CONFIG.pixDiscountPercent > 0) {
         discountPix = roundMoney(subtotal * ATELIE_CONFIG.pixDiscountPercent);
       }
 
@@ -777,7 +776,7 @@
       
       let payName = 'A Combinar com a Vendedora (WhatsApp)';
       if (CheckoutState.paymentMethod === 'pix') {
-        payName = 'PIX Instantâneo à Vista (5% de Desconto)';
+        payName = 'PIX Instantâneo à Vista';
       } else if (CheckoutState.paymentMethod === 'credit_card') {
         payName = 'Cartão de Crédito (Combinar link no WhatsApp)';
       }
@@ -1091,7 +1090,7 @@
       let closingMsg = 'Gostaria de combinar a melhor forma de pagamento e entrega com você. Muito obrigada(o)!';
 
       if (order.paymentMethod === 'pix') {
-        payLabel = 'PIX à Vista (5% de Desconto)';
+        payLabel = 'PIX à Vista';
         closingMsg = 'Já estou realizando o PIX! Segue o comprovante assim que concluir. Muito obrigada(o)!';
       } else if (order.paymentMethod === 'credit_card') {
         payLabel = 'Cartão de Crédito (Combinar link no WhatsApp)';
@@ -1152,7 +1151,7 @@
       lines.push(`• Subtotal dos produtos: ${formatMoney(order.pricing.subtotal)}`);
       lines.push(`• Frete: A combinar`);
       if (order.pricing.discountPix > 0) {
-        lines.push(`• Desconto Pix (5% OFF): -${formatMoney(order.pricing.discountPix)}`);
+        lines.push(`• Desconto Pix: -${formatMoney(order.pricing.discountPix)}`);
       }
       lines.push(`👉 *VALOR TOTAL: ${formatMoney(order.pricing.total)}*`);
       lines.push('');
